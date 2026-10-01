@@ -13,10 +13,7 @@ import {
 import { cn } from "@/shared/lib/utils";
 import { useAuth } from "@/features/auth/auth-context";
 import type { SupportIssue } from "../api/support.api";
-import {
-  useDeleteSupportIssue,
-  useToggleSupportIssueStatus,
-} from "../hooks/use-support-mutations";
+import { useDeleteSupportIssue, useToggleSupportIssueStatus } from "../hooks/use-support-mutations";
 import { fmtTime, shortDayFmt } from "../lib/support-format";
 
 export function SupportStatusBadge({

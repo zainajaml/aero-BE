@@ -58,11 +58,7 @@ export function useEditSupportMessage(issueId: string, onSaved: () => void) {
   const qc = useQueryClient();
   return useMutation({
     mutationFn: ({ id, doc }: { id: string; doc: unknown }) =>
-      editSupportMessage(
-        issueId,
-        id,
-        serializeCommentDoc(normalizeDocumentImagesForStorage(doc)),
-      ),
+      editSupportMessage(issueId, id, serializeCommentDoc(normalizeDocumentImagesForStorage(doc))),
     onSuccess: () => {
       onSaved();
       void qc.invalidateQueries({ queryKey: supportKeys.issue(issueId) });
