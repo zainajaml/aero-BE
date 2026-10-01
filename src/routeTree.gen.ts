@@ -10,17 +10,23 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
 import { Route as AcceptRouteImport } from './routes/accept'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as NoAccessRouteImport } from './routes/no-access'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as SignupRouteImport } from './routes/signup'
+import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as BlogAiSprintPlanningRouteImport } from './routes/blog.ai-sprint-planning'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedRoute = AuthenticatedRouteImport.update({
+  id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AcceptRoute = AcceptRouteImport.update({
@@ -53,6 +59,11 @@ const SignupRoute = SignupRouteImport.update({
   path: '/signup',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
 const BlogAiSprintPlanningRoute = BlogAiSprintPlanningRouteImport.update({
   id: '/blog/ai-sprint-planning',
   path: '/blog/ai-sprint-planning',
@@ -67,6 +78,7 @@ export interface FileRoutesByFullPath {
   '/onboarding': typeof OnboardingRoute
   '/reset-password': typeof ResetPasswordRoute
   '/signup': typeof SignupRoute
+  '/dashboard': typeof AuthenticatedDashboardRoute
   '/blog/ai-sprint-planning': typeof BlogAiSprintPlanningRoute
 }
 export interface FileRoutesByTo {
@@ -77,17 +89,20 @@ export interface FileRoutesByTo {
   '/onboarding': typeof OnboardingRoute
   '/reset-password': typeof ResetPasswordRoute
   '/signup': typeof SignupRoute
+  '/dashboard': typeof AuthenticatedDashboardRoute
   '/blog/ai-sprint-planning': typeof BlogAiSprintPlanningRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteWithChildren
   '/accept': typeof AcceptRoute
   '/login': typeof LoginRoute
   '/no-access': typeof NoAccessRoute
   '/onboarding': typeof OnboardingRoute
   '/reset-password': typeof ResetPasswordRoute
   '/signup': typeof SignupRoute
+  '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/blog/ai-sprint-planning': typeof BlogAiSprintPlanningRoute
 }
 export interface FileRouteTypes {
@@ -100,6 +115,7 @@ export interface FileRouteTypes {
     | '/onboarding'
     | '/reset-password'
     | '/signup'
+    | '/dashboard'
     | '/blog/ai-sprint-planning'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -110,21 +126,25 @@ export interface FileRouteTypes {
     | '/onboarding'
     | '/reset-password'
     | '/signup'
+    | '/dashboard'
     | '/blog/ai-sprint-planning'
   id:
     | '__root__'
     | '/'
+    | '/_authenticated'
     | '/accept'
     | '/login'
     | '/no-access'
     | '/onboarding'
     | '/reset-password'
     | '/signup'
+    | '/_authenticated/dashboard'
     | '/blog/ai-sprint-planning'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRoute: typeof AuthenticatedRouteWithChildren
   AcceptRoute: typeof AcceptRoute
   LoginRoute: typeof LoginRoute
   NoAccessRoute: typeof NoAccessRoute
@@ -141,6 +161,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/accept': {
@@ -185,6 +212,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SignupRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/dashboard': {
+      id: '/_authenticated/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof AuthenticatedDashboardRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
     '/blog/ai-sprint-planning': {
       id: '/blog/ai-sprint-planning'
       path: '/blog/ai-sprint-planning'
@@ -195,8 +229,21 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface AuthenticatedRouteChildren {
+  AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+}
+
+const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
+  AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+}
+
+const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(
+  AuthenticatedRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRoute: AuthenticatedRouteWithChildren,
   AcceptRoute: AcceptRoute,
   LoginRoute: LoginRoute,
   NoAccessRoute: NoAccessRoute,

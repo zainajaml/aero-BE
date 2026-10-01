@@ -16,6 +16,7 @@ for f in "$@"; do
     -e 's#"@/lib/auth/post-login-redirect"#"@/features/auth/lib/post-login-redirect"#g' \
     -e 's#"@/lib/auth/active-project-store"#"@/features/auth/lib/active-project-store"#g' \
     -e 's#"@/lib/auth/active-account-store"#"@/features/auth/lib/active-account-store"#g' \
+    -e 's#"@/assets/access-revoked-illustration.png.asset.json"#"@/assets/access-revoked-illustration.jpg"#g' \
     -e 's#"@/assets/(.*)\.(png|jpg)\.asset\.json"#"@/assets/\1.\2"#g' \
     "$f"
 done
