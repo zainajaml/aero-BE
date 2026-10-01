@@ -18,16 +18,23 @@ import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as SignupRouteImport } from './routes/signup'
 import { Route as UnsubscribeRouteImport } from './routes/unsubscribe'
+import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
+import { Route as AuthenticatedAuditRouteImport } from './routes/_authenticated/audit'
 import { Route as AuthenticatedBillingRouteImport } from './routes/_authenticated/billing'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedDocumentsRouteImport } from './routes/_authenticated/documents'
+import { Route as AuthenticatedJiraRouteImport } from './routes/_authenticated/jira'
 import { Route as AuthenticatedMyWorkRouteImport } from './routes/_authenticated/my-work'
 import { Route as AuthenticatedNotificationsRouteImport } from './routes/_authenticated/notifications'
 import { Route as AuthenticatedPreferencesRouteImport } from './routes/_authenticated/preferences'
 import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
+import { Route as AuthenticatedProjectsRouteImport } from './routes/_authenticated/projects'
 import { Route as AuthenticatedReleasesRouteImport } from './routes/_authenticated/releases'
 import { Route as AuthenticatedSprintStatusRouteImport } from './routes/_authenticated/sprint-status'
+import { Route as AuthenticatedSuperAdminRouteImport } from './routes/_authenticated/super-admin'
 import { Route as AuthenticatedWorkforceRouteImport } from './routes/_authenticated/workforce'
 import { Route as BlogAiSprintPlanningRouteImport } from './routes/blog.ai-sprint-planning'
+import { Route as TicketTicketIdRouteImport } from './routes/ticket.$ticketId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -73,6 +80,16 @@ const UnsubscribeRoute = UnsubscribeRouteImport.update({
   path: '/unsubscribe',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedAuditRoute = AuthenticatedAuditRouteImport.update({
+  id: '/audit',
+  path: '/audit',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
 const AuthenticatedBillingRoute = AuthenticatedBillingRouteImport.update({
   id: '/billing',
   path: '/billing',
@@ -81,6 +98,16 @@ const AuthenticatedBillingRoute = AuthenticatedBillingRouteImport.update({
 const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedDocumentsRoute = AuthenticatedDocumentsRouteImport.update({
+  id: '/documents',
+  path: '/documents',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedJiraRoute = AuthenticatedJiraRouteImport.update({
+  id: '/jira',
+  path: '/jira',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
 const AuthenticatedMyWorkRoute = AuthenticatedMyWorkRouteImport.update({
@@ -105,6 +132,11 @@ const AuthenticatedProfileRoute = AuthenticatedProfileRouteImport.update({
   path: '/profile',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
+const AuthenticatedProjectsRoute = AuthenticatedProjectsRouteImport.update({
+  id: '/projects',
+  path: '/projects',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
 const AuthenticatedReleasesRoute = AuthenticatedReleasesRouteImport.update({
   id: '/releases',
   path: '/releases',
@@ -116,6 +148,11 @@ const AuthenticatedSprintStatusRoute =
     path: '/sprint-status',
     getParentRoute: () => AuthenticatedRoute,
   } as any)
+const AuthenticatedSuperAdminRoute = AuthenticatedSuperAdminRouteImport.update({
+  id: '/super-admin',
+  path: '/super-admin',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
 const AuthenticatedWorkforceRoute = AuthenticatedWorkforceRouteImport.update({
   id: '/workforce',
   path: '/workforce',
@@ -124,6 +161,11 @@ const AuthenticatedWorkforceRoute = AuthenticatedWorkforceRouteImport.update({
 const BlogAiSprintPlanningRoute = BlogAiSprintPlanningRouteImport.update({
   id: '/blog/ai-sprint-planning',
   path: '/blog/ai-sprint-planning',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TicketTicketIdRoute = TicketTicketIdRouteImport.update({
+  id: '/ticket/$ticketId',
+  path: '/ticket/$ticketId',
   getParentRoute: () => rootRouteImport,
 } as any)
 
@@ -136,16 +178,23 @@ export interface FileRoutesByFullPath {
   '/reset-password': typeof ResetPasswordRoute
   '/signup': typeof SignupRoute
   '/unsubscribe': typeof UnsubscribeRoute
+  '/admin': typeof AuthenticatedAdminRoute
+  '/audit': typeof AuthenticatedAuditRoute
   '/billing': typeof AuthenticatedBillingRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/documents': typeof AuthenticatedDocumentsRoute
+  '/jira': typeof AuthenticatedJiraRoute
   '/my-work': typeof AuthenticatedMyWorkRoute
   '/notifications': typeof AuthenticatedNotificationsRoute
   '/preferences': typeof AuthenticatedPreferencesRoute
   '/profile': typeof AuthenticatedProfileRoute
+  '/projects': typeof AuthenticatedProjectsRoute
   '/releases': typeof AuthenticatedReleasesRoute
   '/sprint-status': typeof AuthenticatedSprintStatusRoute
+  '/super-admin': typeof AuthenticatedSuperAdminRoute
   '/workforce': typeof AuthenticatedWorkforceRoute
   '/blog/ai-sprint-planning': typeof BlogAiSprintPlanningRoute
+  '/ticket/$ticketId': typeof TicketTicketIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -156,16 +205,23 @@ export interface FileRoutesByTo {
   '/reset-password': typeof ResetPasswordRoute
   '/signup': typeof SignupRoute
   '/unsubscribe': typeof UnsubscribeRoute
+  '/admin': typeof AuthenticatedAdminRoute
+  '/audit': typeof AuthenticatedAuditRoute
   '/billing': typeof AuthenticatedBillingRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/documents': typeof AuthenticatedDocumentsRoute
+  '/jira': typeof AuthenticatedJiraRoute
   '/my-work': typeof AuthenticatedMyWorkRoute
   '/notifications': typeof AuthenticatedNotificationsRoute
   '/preferences': typeof AuthenticatedPreferencesRoute
   '/profile': typeof AuthenticatedProfileRoute
+  '/projects': typeof AuthenticatedProjectsRoute
   '/releases': typeof AuthenticatedReleasesRoute
   '/sprint-status': typeof AuthenticatedSprintStatusRoute
+  '/super-admin': typeof AuthenticatedSuperAdminRoute
   '/workforce': typeof AuthenticatedWorkforceRoute
   '/blog/ai-sprint-planning': typeof BlogAiSprintPlanningRoute
+  '/ticket/$ticketId': typeof TicketTicketIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -178,16 +234,23 @@ export interface FileRoutesById {
   '/reset-password': typeof ResetPasswordRoute
   '/signup': typeof SignupRoute
   '/unsubscribe': typeof UnsubscribeRoute
+  '/_authenticated/admin': typeof AuthenticatedAdminRoute
+  '/_authenticated/audit': typeof AuthenticatedAuditRoute
   '/_authenticated/billing': typeof AuthenticatedBillingRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/_authenticated/documents': typeof AuthenticatedDocumentsRoute
+  '/_authenticated/jira': typeof AuthenticatedJiraRoute
   '/_authenticated/my-work': typeof AuthenticatedMyWorkRoute
   '/_authenticated/notifications': typeof AuthenticatedNotificationsRoute
   '/_authenticated/preferences': typeof AuthenticatedPreferencesRoute
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
+  '/_authenticated/projects': typeof AuthenticatedProjectsRoute
   '/_authenticated/releases': typeof AuthenticatedReleasesRoute
   '/_authenticated/sprint-status': typeof AuthenticatedSprintStatusRoute
+  '/_authenticated/super-admin': typeof AuthenticatedSuperAdminRoute
   '/_authenticated/workforce': typeof AuthenticatedWorkforceRoute
   '/blog/ai-sprint-planning': typeof BlogAiSprintPlanningRoute
+  '/ticket/$ticketId': typeof TicketTicketIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -200,16 +263,23 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/signup'
     | '/unsubscribe'
+    | '/admin'
+    | '/audit'
     | '/billing'
     | '/dashboard'
+    | '/documents'
+    | '/jira'
     | '/my-work'
     | '/notifications'
     | '/preferences'
     | '/profile'
+    | '/projects'
     | '/releases'
     | '/sprint-status'
+    | '/super-admin'
     | '/workforce'
     | '/blog/ai-sprint-planning'
+    | '/ticket/$ticketId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -220,16 +290,23 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/signup'
     | '/unsubscribe'
+    | '/admin'
+    | '/audit'
     | '/billing'
     | '/dashboard'
+    | '/documents'
+    | '/jira'
     | '/my-work'
     | '/notifications'
     | '/preferences'
     | '/profile'
+    | '/projects'
     | '/releases'
     | '/sprint-status'
+    | '/super-admin'
     | '/workforce'
     | '/blog/ai-sprint-planning'
+    | '/ticket/$ticketId'
   id:
     | '__root__'
     | '/'
@@ -241,16 +318,23 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/signup'
     | '/unsubscribe'
+    | '/_authenticated/admin'
+    | '/_authenticated/audit'
     | '/_authenticated/billing'
     | '/_authenticated/dashboard'
+    | '/_authenticated/documents'
+    | '/_authenticated/jira'
     | '/_authenticated/my-work'
     | '/_authenticated/notifications'
     | '/_authenticated/preferences'
     | '/_authenticated/profile'
+    | '/_authenticated/projects'
     | '/_authenticated/releases'
     | '/_authenticated/sprint-status'
+    | '/_authenticated/super-admin'
     | '/_authenticated/workforce'
     | '/blog/ai-sprint-planning'
+    | '/ticket/$ticketId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -264,6 +348,7 @@ export interface RootRouteChildren {
   SignupRoute: typeof SignupRoute
   UnsubscribeRoute: typeof UnsubscribeRoute
   BlogAiSprintPlanningRoute: typeof BlogAiSprintPlanningRoute
+  TicketTicketIdRoute: typeof TicketTicketIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -331,6 +416,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof UnsubscribeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/admin': {
+      id: '/_authenticated/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AuthenticatedAdminRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/audit': {
+      id: '/_authenticated/audit'
+      path: '/audit'
+      fullPath: '/audit'
+      preLoaderRoute: typeof AuthenticatedAuditRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
     '/_authenticated/billing': {
       id: '/_authenticated/billing'
       path: '/billing'
@@ -343,6 +442,20 @@ declare module '@tanstack/react-router' {
       path: '/dashboard'
       fullPath: '/dashboard'
       preLoaderRoute: typeof AuthenticatedDashboardRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/documents': {
+      id: '/_authenticated/documents'
+      path: '/documents'
+      fullPath: '/documents'
+      preLoaderRoute: typeof AuthenticatedDocumentsRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/jira': {
+      id: '/_authenticated/jira'
+      path: '/jira'
+      fullPath: '/jira'
+      preLoaderRoute: typeof AuthenticatedJiraRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
     '/_authenticated/my-work': {
@@ -373,6 +486,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedProfileRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    '/_authenticated/projects': {
+      id: '/_authenticated/projects'
+      path: '/projects'
+      fullPath: '/projects'
+      preLoaderRoute: typeof AuthenticatedProjectsRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
     '/_authenticated/releases': {
       id: '/_authenticated/releases'
       path: '/releases'
@@ -385,6 +505,13 @@ declare module '@tanstack/react-router' {
       path: '/sprint-status'
       fullPath: '/sprint-status'
       preLoaderRoute: typeof AuthenticatedSprintStatusRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/super-admin': {
+      id: '/_authenticated/super-admin'
+      path: '/super-admin'
+      fullPath: '/super-admin'
+      preLoaderRoute: typeof AuthenticatedSuperAdminRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
     '/_authenticated/workforce': {
@@ -401,30 +528,49 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogAiSprintPlanningRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/ticket/$ticketId': {
+      id: '/ticket/$ticketId'
+      path: '/ticket/$ticketId'
+      fullPath: '/ticket/$ticketId'
+      preLoaderRoute: typeof TicketTicketIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 interface AuthenticatedRouteChildren {
+  AuthenticatedAdminRoute: typeof AuthenticatedAdminRoute
+  AuthenticatedAuditRoute: typeof AuthenticatedAuditRoute
   AuthenticatedBillingRoute: typeof AuthenticatedBillingRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedDocumentsRoute: typeof AuthenticatedDocumentsRoute
+  AuthenticatedJiraRoute: typeof AuthenticatedJiraRoute
   AuthenticatedMyWorkRoute: typeof AuthenticatedMyWorkRoute
   AuthenticatedNotificationsRoute: typeof AuthenticatedNotificationsRoute
   AuthenticatedPreferencesRoute: typeof AuthenticatedPreferencesRoute
   AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
+  AuthenticatedProjectsRoute: typeof AuthenticatedProjectsRoute
   AuthenticatedReleasesRoute: typeof AuthenticatedReleasesRoute
   AuthenticatedSprintStatusRoute: typeof AuthenticatedSprintStatusRoute
+  AuthenticatedSuperAdminRoute: typeof AuthenticatedSuperAdminRoute
   AuthenticatedWorkforceRoute: typeof AuthenticatedWorkforceRoute
 }
 
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
+  AuthenticatedAdminRoute: AuthenticatedAdminRoute,
+  AuthenticatedAuditRoute: AuthenticatedAuditRoute,
   AuthenticatedBillingRoute: AuthenticatedBillingRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedDocumentsRoute: AuthenticatedDocumentsRoute,
+  AuthenticatedJiraRoute: AuthenticatedJiraRoute,
   AuthenticatedMyWorkRoute: AuthenticatedMyWorkRoute,
   AuthenticatedNotificationsRoute: AuthenticatedNotificationsRoute,
   AuthenticatedPreferencesRoute: AuthenticatedPreferencesRoute,
   AuthenticatedProfileRoute: AuthenticatedProfileRoute,
+  AuthenticatedProjectsRoute: AuthenticatedProjectsRoute,
   AuthenticatedReleasesRoute: AuthenticatedReleasesRoute,
   AuthenticatedSprintStatusRoute: AuthenticatedSprintStatusRoute,
+  AuthenticatedSuperAdminRoute: AuthenticatedSuperAdminRoute,
   AuthenticatedWorkforceRoute: AuthenticatedWorkforceRoute,
 }
 
@@ -443,6 +589,7 @@ const rootRouteChildren: RootRouteChildren = {
   SignupRoute: SignupRoute,
   UnsubscribeRoute: UnsubscribeRoute,
   BlogAiSprintPlanningRoute: BlogAiSprintPlanningRoute,
+  TicketTicketIdRoute: TicketTicketIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
