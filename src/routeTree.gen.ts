@@ -17,7 +17,16 @@ import { Route as NoAccessRouteImport } from './routes/no-access'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as SignupRouteImport } from './routes/signup'
+import { Route as UnsubscribeRouteImport } from './routes/unsubscribe'
+import { Route as AuthenticatedBillingRouteImport } from './routes/_authenticated/billing'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedMyWorkRouteImport } from './routes/_authenticated/my-work'
+import { Route as AuthenticatedNotificationsRouteImport } from './routes/_authenticated/notifications'
+import { Route as AuthenticatedPreferencesRouteImport } from './routes/_authenticated/preferences'
+import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
+import { Route as AuthenticatedReleasesRouteImport } from './routes/_authenticated/releases'
+import { Route as AuthenticatedSprintStatusRouteImport } from './routes/_authenticated/sprint-status'
+import { Route as AuthenticatedWorkforceRouteImport } from './routes/_authenticated/workforce'
 import { Route as BlogAiSprintPlanningRouteImport } from './routes/blog.ai-sprint-planning'
 
 const IndexRoute = IndexRouteImport.update({
@@ -59,9 +68,57 @@ const SignupRoute = SignupRouteImport.update({
   path: '/signup',
   getParentRoute: () => rootRouteImport,
 } as any)
+const UnsubscribeRoute = UnsubscribeRouteImport.update({
+  id: '/unsubscribe',
+  path: '/unsubscribe',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedBillingRoute = AuthenticatedBillingRouteImport.update({
+  id: '/billing',
+  path: '/billing',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
 const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedMyWorkRoute = AuthenticatedMyWorkRouteImport.update({
+  id: '/my-work',
+  path: '/my-work',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedNotificationsRoute =
+  AuthenticatedNotificationsRouteImport.update({
+    id: '/notifications',
+    path: '/notifications',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+const AuthenticatedPreferencesRoute =
+  AuthenticatedPreferencesRouteImport.update({
+    id: '/preferences',
+    path: '/preferences',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+const AuthenticatedProfileRoute = AuthenticatedProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedReleasesRoute = AuthenticatedReleasesRouteImport.update({
+  id: '/releases',
+  path: '/releases',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedSprintStatusRoute =
+  AuthenticatedSprintStatusRouteImport.update({
+    id: '/sprint-status',
+    path: '/sprint-status',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+const AuthenticatedWorkforceRoute = AuthenticatedWorkforceRouteImport.update({
+  id: '/workforce',
+  path: '/workforce',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
 const BlogAiSprintPlanningRoute = BlogAiSprintPlanningRouteImport.update({
@@ -78,7 +135,16 @@ export interface FileRoutesByFullPath {
   '/onboarding': typeof OnboardingRoute
   '/reset-password': typeof ResetPasswordRoute
   '/signup': typeof SignupRoute
+  '/unsubscribe': typeof UnsubscribeRoute
+  '/billing': typeof AuthenticatedBillingRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/my-work': typeof AuthenticatedMyWorkRoute
+  '/notifications': typeof AuthenticatedNotificationsRoute
+  '/preferences': typeof AuthenticatedPreferencesRoute
+  '/profile': typeof AuthenticatedProfileRoute
+  '/releases': typeof AuthenticatedReleasesRoute
+  '/sprint-status': typeof AuthenticatedSprintStatusRoute
+  '/workforce': typeof AuthenticatedWorkforceRoute
   '/blog/ai-sprint-planning': typeof BlogAiSprintPlanningRoute
 }
 export interface FileRoutesByTo {
@@ -89,7 +155,16 @@ export interface FileRoutesByTo {
   '/onboarding': typeof OnboardingRoute
   '/reset-password': typeof ResetPasswordRoute
   '/signup': typeof SignupRoute
+  '/unsubscribe': typeof UnsubscribeRoute
+  '/billing': typeof AuthenticatedBillingRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/my-work': typeof AuthenticatedMyWorkRoute
+  '/notifications': typeof AuthenticatedNotificationsRoute
+  '/preferences': typeof AuthenticatedPreferencesRoute
+  '/profile': typeof AuthenticatedProfileRoute
+  '/releases': typeof AuthenticatedReleasesRoute
+  '/sprint-status': typeof AuthenticatedSprintStatusRoute
+  '/workforce': typeof AuthenticatedWorkforceRoute
   '/blog/ai-sprint-planning': typeof BlogAiSprintPlanningRoute
 }
 export interface FileRoutesById {
@@ -102,7 +177,16 @@ export interface FileRoutesById {
   '/onboarding': typeof OnboardingRoute
   '/reset-password': typeof ResetPasswordRoute
   '/signup': typeof SignupRoute
+  '/unsubscribe': typeof UnsubscribeRoute
+  '/_authenticated/billing': typeof AuthenticatedBillingRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/_authenticated/my-work': typeof AuthenticatedMyWorkRoute
+  '/_authenticated/notifications': typeof AuthenticatedNotificationsRoute
+  '/_authenticated/preferences': typeof AuthenticatedPreferencesRoute
+  '/_authenticated/profile': typeof AuthenticatedProfileRoute
+  '/_authenticated/releases': typeof AuthenticatedReleasesRoute
+  '/_authenticated/sprint-status': typeof AuthenticatedSprintStatusRoute
+  '/_authenticated/workforce': typeof AuthenticatedWorkforceRoute
   '/blog/ai-sprint-planning': typeof BlogAiSprintPlanningRoute
 }
 export interface FileRouteTypes {
@@ -115,7 +199,16 @@ export interface FileRouteTypes {
     | '/onboarding'
     | '/reset-password'
     | '/signup'
+    | '/unsubscribe'
+    | '/billing'
     | '/dashboard'
+    | '/my-work'
+    | '/notifications'
+    | '/preferences'
+    | '/profile'
+    | '/releases'
+    | '/sprint-status'
+    | '/workforce'
     | '/blog/ai-sprint-planning'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -126,7 +219,16 @@ export interface FileRouteTypes {
     | '/onboarding'
     | '/reset-password'
     | '/signup'
+    | '/unsubscribe'
+    | '/billing'
     | '/dashboard'
+    | '/my-work'
+    | '/notifications'
+    | '/preferences'
+    | '/profile'
+    | '/releases'
+    | '/sprint-status'
+    | '/workforce'
     | '/blog/ai-sprint-planning'
   id:
     | '__root__'
@@ -138,7 +240,16 @@ export interface FileRouteTypes {
     | '/onboarding'
     | '/reset-password'
     | '/signup'
+    | '/unsubscribe'
+    | '/_authenticated/billing'
     | '/_authenticated/dashboard'
+    | '/_authenticated/my-work'
+    | '/_authenticated/notifications'
+    | '/_authenticated/preferences'
+    | '/_authenticated/profile'
+    | '/_authenticated/releases'
+    | '/_authenticated/sprint-status'
+    | '/_authenticated/workforce'
     | '/blog/ai-sprint-planning'
   fileRoutesById: FileRoutesById
 }
@@ -151,6 +262,7 @@ export interface RootRouteChildren {
   OnboardingRoute: typeof OnboardingRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
   SignupRoute: typeof SignupRoute
+  UnsubscribeRoute: typeof UnsubscribeRoute
   BlogAiSprintPlanningRoute: typeof BlogAiSprintPlanningRoute
 }
 
@@ -212,11 +324,74 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SignupRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/unsubscribe': {
+      id: '/unsubscribe'
+      path: '/unsubscribe'
+      fullPath: '/unsubscribe'
+      preLoaderRoute: typeof UnsubscribeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/billing': {
+      id: '/_authenticated/billing'
+      path: '/billing'
+      fullPath: '/billing'
+      preLoaderRoute: typeof AuthenticatedBillingRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
     '/_authenticated/dashboard': {
       id: '/_authenticated/dashboard'
       path: '/dashboard'
       fullPath: '/dashboard'
       preLoaderRoute: typeof AuthenticatedDashboardRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/my-work': {
+      id: '/_authenticated/my-work'
+      path: '/my-work'
+      fullPath: '/my-work'
+      preLoaderRoute: typeof AuthenticatedMyWorkRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/notifications': {
+      id: '/_authenticated/notifications'
+      path: '/notifications'
+      fullPath: '/notifications'
+      preLoaderRoute: typeof AuthenticatedNotificationsRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/preferences': {
+      id: '/_authenticated/preferences'
+      path: '/preferences'
+      fullPath: '/preferences'
+      preLoaderRoute: typeof AuthenticatedPreferencesRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/profile': {
+      id: '/_authenticated/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof AuthenticatedProfileRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/releases': {
+      id: '/_authenticated/releases'
+      path: '/releases'
+      fullPath: '/releases'
+      preLoaderRoute: typeof AuthenticatedReleasesRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/sprint-status': {
+      id: '/_authenticated/sprint-status'
+      path: '/sprint-status'
+      fullPath: '/sprint-status'
+      preLoaderRoute: typeof AuthenticatedSprintStatusRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/workforce': {
+      id: '/_authenticated/workforce'
+      path: '/workforce'
+      fullPath: '/workforce'
+      preLoaderRoute: typeof AuthenticatedWorkforceRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
     '/blog/ai-sprint-planning': {
@@ -230,11 +405,27 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthenticatedRouteChildren {
+  AuthenticatedBillingRoute: typeof AuthenticatedBillingRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedMyWorkRoute: typeof AuthenticatedMyWorkRoute
+  AuthenticatedNotificationsRoute: typeof AuthenticatedNotificationsRoute
+  AuthenticatedPreferencesRoute: typeof AuthenticatedPreferencesRoute
+  AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
+  AuthenticatedReleasesRoute: typeof AuthenticatedReleasesRoute
+  AuthenticatedSprintStatusRoute: typeof AuthenticatedSprintStatusRoute
+  AuthenticatedWorkforceRoute: typeof AuthenticatedWorkforceRoute
 }
 
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
+  AuthenticatedBillingRoute: AuthenticatedBillingRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedMyWorkRoute: AuthenticatedMyWorkRoute,
+  AuthenticatedNotificationsRoute: AuthenticatedNotificationsRoute,
+  AuthenticatedPreferencesRoute: AuthenticatedPreferencesRoute,
+  AuthenticatedProfileRoute: AuthenticatedProfileRoute,
+  AuthenticatedReleasesRoute: AuthenticatedReleasesRoute,
+  AuthenticatedSprintStatusRoute: AuthenticatedSprintStatusRoute,
+  AuthenticatedWorkforceRoute: AuthenticatedWorkforceRoute,
 }
 
 const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(
@@ -250,6 +441,7 @@ const rootRouteChildren: RootRouteChildren = {
   OnboardingRoute: OnboardingRoute,
   ResetPasswordRoute: ResetPasswordRoute,
   SignupRoute: SignupRoute,
+  UnsubscribeRoute: UnsubscribeRoute,
   BlogAiSprintPlanningRoute: BlogAiSprintPlanningRoute,
 }
 export const routeTree = rootRouteImport
