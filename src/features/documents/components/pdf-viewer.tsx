@@ -87,16 +87,12 @@ function PdfPage({
   useEffect(() => {
     if (!page || !canvasRef.current || !wrapperRef.current) return;
     const canvas = canvasRef.current;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
 
     // Measure the available width from the scroll parent, not the wrapper: the
     // wrapper gets an explicit width after the first render, which would make a
     // second measurement pick up the previous render's width.
     const containerWidth =
-      wrapperRef.current.parentElement?.clientWidth ||
-      wrapperRef.current.clientWidth ||
-      800;
+      wrapperRef.current.parentElement?.clientWidth || wrapperRef.current.clientWidth || 800;
     const baseViewport = page.getViewport({ scale: 1 });
     const fitScale = Math.min(2, containerWidth / baseViewport.width);
     const scale = fitScale * zoom;
@@ -107,11 +103,15 @@ function PdfPage({
     canvas.height = Math.floor(viewport.height * dpr);
     canvas.style.width = `${viewport.width}px`;
     canvas.style.height = `${viewport.height}px`;
-    ctx.scale(dpr, dpr);
 
     setRender({ width: viewport.width, height: viewport.height, scale });
 
-    const renderTask = page.render({ canvasContext: ctx, viewport, canvas });
+    // pdf.js v6 renders into `canvas` itself; device-pixel scaling goes through `transform`.
+    const renderTask = page.render({
+      canvas,
+      viewport,
+      transform: dpr !== 1 ? [dpr, 0, 0, dpr, 0, 0] : undefined,
+    });
     renderTask.promise.catch(() => {});
 
     return () => {
@@ -186,7 +186,6 @@ function PdfPage({
           }
         }
 
-
         if (cancelled) return;
         setHighlights(pageHighlights);
         onMatchCount(pageHighlights.length);
@@ -203,7 +202,6 @@ function PdfPage({
     };
   }, [page, query, render, onMatchCount]);
 
-
   // Mark the current global match and scroll it into view.
   const currentLocalIndex = useMemo(() => {
     if (currentMatch === null || highlights.length === 0) return null;
@@ -215,6 +213,8 @@ function PdfPage({
     const el = wrapperRef.current;
     if (!el) return;
     el.scrollIntoView({ behavior: "smooth", block: "center" });
+    // Scroll only when the current match moves, not when highlights are recomputed.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentLocalIndex]);
 
   const effectiveHighlights = highlights.map((h, i) => ({
@@ -223,23 +223,14 @@ function PdfPage({
   }));
 
   return (
-    <div
-      ref={wrapperRef}
-      className="relative mx-auto w-fit"
-      style={{ width: render?.width }}
-    >
-      <canvas
-        ref={canvasRef}
-        className="rounded-lg border border-border/60 shadow-sm"
-      />
+    <div ref={wrapperRef} className="relative mx-auto w-fit" style={{ width: render?.width }}>
+      <canvas ref={canvasRef} className="rounded-lg border border-border/60 shadow-sm" />
       {effectiveHighlights.map((h, i) => (
         <div
           key={i}
           className={cn(
             "absolute pointer-events-none rounded-[2px] mix-blend-multiply transition-colors",
-            h.isCurrent
-              ? "bg-orange-400/80 ring-1 ring-orange-500/80"
-              : "bg-yellow-300/70"
+            h.isCurrent ? "bg-orange-400/80 ring-1 ring-orange-500/80" : "bg-yellow-300/70",
           )}
           style={{
             left: h.x,
@@ -249,7 +240,6 @@ function PdfPage({
           }}
         />
       ))}
-
     </div>
   );
 }
@@ -287,17 +277,20 @@ export function PdfViewer({
     (async () => {
       try {
         const pdfjs = await import("pdfjs-dist");
-        const workerSrc = (
-          await import("pdfjs-dist/build/pdf.worker.min.mjs?url")
-        ).default;
-        pdfjs.GlobalWorkerOptions.workerSrc = workerSrc;
+        // v6 ships an ES-module worker; Vite emits it as an asset and hands back its URL.
+        if (!pdfjs.GlobalWorkerOptions.workerSrc) {
+          pdfjs.GlobalWorkerOptions.workerSrc = (
+            await import("pdfjs-dist/build/pdf.worker.min.mjs?url")
+          ).default;
+        }
+        if (cancelled) return;
 
         const loadingTask = pdfjs.getDocument({ url });
+        cleanups.push(() => void loadingTask.destroy());
         const d = await loadingTask.promise;
         if (cancelled) return;
         setDoc(d);
         setLoading(false);
-        cleanups.push(() => void loadingTask.destroy());
       } catch {
         if (!cancelled) {
           setError(true);
@@ -314,7 +307,7 @@ export function PdfViewer({
 
   const totalMatches = useMemo(
     () => Object.values(matchCounts).reduce((a, b) => a + b, 0),
-    [matchCounts]
+    [matchCounts],
   );
 
   useEffect(() => {
@@ -339,12 +332,11 @@ export function PdfViewer({
     return result;
   }, [doc, matchCounts, currentMatch]);
 
-  const handleMatchCount = useCallback(
-    (pageNumber: number, count: number) => {
-      setMatchCounts((prev) => (prev[pageNumber] === count ? prev : { ...prev, [pageNumber]: count }));
-    },
-    [],
-  );
+  const handleMatchCount = useCallback((pageNumber: number, count: number) => {
+    setMatchCounts((prev) =>
+      prev[pageNumber] === count ? prev : { ...prev, [pageNumber]: count },
+    );
+  }, []);
 
   return (
     <div className="relative">
@@ -358,10 +350,7 @@ export function PdfViewer({
           Could not render this PDF. Use the download button to open it.
         </div>
       )}
-      <div
-        aria-label={name}
-        className="flex max-h-[75vh] flex-col gap-4 overflow-y-auto"
-      >
+      <div aria-label={name} className="flex max-h-[75vh] flex-col gap-4 overflow-y-auto">
         {doc &&
           Array.from({ length: doc.numPages }, (_, i) => i + 1).map((pageNumber) => (
             <PdfPage

@@ -24,7 +24,9 @@ export const createDocument = (
   projectId: string,
   body: components["schemas"]["CreateDocumentRequest"],
 ) =>
-  unwrap(api.POST("/api/v1/projects/{projectId}/documents", { params: { path: { projectId } }, body }));
+  unwrap(
+    api.POST("/api/v1/projects/{projectId}/documents", { params: { path: { projectId } }, body }),
+  );
 
 export function uploadDocumentFile(projectId: string, file: File, folderId: string | null) {
   const form = new FormData();
