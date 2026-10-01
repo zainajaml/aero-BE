@@ -18,5 +18,18 @@ for f in "$@"; do
     -e 's#"@/lib/auth/active-account-store"#"@/features/auth/lib/active-account-store"#g' \
     -e 's#"@/assets/access-revoked-illustration.png.asset.json"#"@/assets/access-revoked-illustration.jpg"#g' \
     -e 's#"@/assets/(.*)\.(png|jpg)\.asset\.json"#"@/assets/\1.\2"#g' \
+    -e 's#"@/lib/(date-validation|email-normalize|format|invite-expiry|job-titles|role-labels|ticket-description)"#"@/shared/lib/\1"#g' \
+    -e 's#"@/components/(confirm-delete|timezone-switcher)"#"@/shared/ui/\1"#g' \
+    -e 's#"@/components/media/user-avatar"#"@/features/users/components/user-avatar"#g' \
+    -e 's#"@/components/media/media-image"#"@/shared/ui/media-image"#g' \
+    -e 's#"@/lib/timezone"#"@/features/users/lib/timezone"#g' \
+    -e 's#"@/lib/project-context"#"@/features/projects/project-context"#g' \
+    -e 's#"@/lib/auth/use-can-write"#"@/features/auth/hooks/use-can-write"#g' \
+    -e 's#"@/components/tickets/(comment-editor|mention-textarea)"#"@/features/rich-text/components/\1"#g' \
+    -e 's#"@/components/documents/(rich-text-editor|link-bubble|document-tags|doc-tag-textarea)"#"@/features/rich-text/components/\1"#g' \
+    -e 's#"@/components/documents/document-viewer-bus"#"@/features/rich-text/lib/document-viewer-bus"#g' \
+    -e 's#"@/lib/(document-images|tiptap-upload-image|tiptap-loading-image|tiptap-link|user-mentions)"#"@/features/rich-text/lib/\1"#g' \
+    -e 's#"@/components/projects/use-archive-project"#"@/features/projects/hooks/use-archive-project"#g' \
+    -e 's#"@/components/projects/(archived-project-banner|no-project-empty-state)"#"@/features/projects/components/\1"#g' \
     "$f"
 done
