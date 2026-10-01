@@ -25,6 +25,7 @@ import { Route as AuthenticatedBillingRouteImport } from './routes/_authenticate
 import { Route as AuthenticatedBoardRouteImport } from './routes/_authenticated/board'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedDocumentsRouteImport } from './routes/_authenticated/documents'
+import { Route as AuthenticatedGanttRouteImport } from './routes/_authenticated/gantt'
 import { Route as AuthenticatedJiraRouteImport } from './routes/_authenticated/jira'
 import { Route as AuthenticatedMyWorkRouteImport } from './routes/_authenticated/my-work'
 import { Route as AuthenticatedNotificationsRouteImport } from './routes/_authenticated/notifications'
@@ -117,6 +118,11 @@ const AuthenticatedDocumentsRoute = AuthenticatedDocumentsRouteImport.update({
   path: '/documents',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
+const AuthenticatedGanttRoute = AuthenticatedGanttRouteImport.update({
+  id: '/gantt',
+  path: '/gantt',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
 const AuthenticatedJiraRoute = AuthenticatedJiraRouteImport.update({
   id: '/jira',
   path: '/jira',
@@ -197,6 +203,7 @@ export interface FileRoutesByFullPath {
   '/board': typeof AuthenticatedBoardRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/documents': typeof AuthenticatedDocumentsRoute
+  '/gantt': typeof AuthenticatedGanttRoute
   '/jira': typeof AuthenticatedJiraRoute
   '/my-work': typeof AuthenticatedMyWorkRoute
   '/notifications': typeof AuthenticatedNotificationsRoute
@@ -226,6 +233,7 @@ export interface FileRoutesByTo {
   '/board': typeof AuthenticatedBoardRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/documents': typeof AuthenticatedDocumentsRoute
+  '/gantt': typeof AuthenticatedGanttRoute
   '/jira': typeof AuthenticatedJiraRoute
   '/my-work': typeof AuthenticatedMyWorkRoute
   '/notifications': typeof AuthenticatedNotificationsRoute
@@ -257,6 +265,7 @@ export interface FileRoutesById {
   '/_authenticated/board': typeof AuthenticatedBoardRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/documents': typeof AuthenticatedDocumentsRoute
+  '/_authenticated/gantt': typeof AuthenticatedGanttRoute
   '/_authenticated/jira': typeof AuthenticatedJiraRoute
   '/_authenticated/my-work': typeof AuthenticatedMyWorkRoute
   '/_authenticated/notifications': typeof AuthenticatedNotificationsRoute
@@ -288,6 +297,7 @@ export interface FileRouteTypes {
     | '/board'
     | '/dashboard'
     | '/documents'
+    | '/gantt'
     | '/jira'
     | '/my-work'
     | '/notifications'
@@ -317,6 +327,7 @@ export interface FileRouteTypes {
     | '/board'
     | '/dashboard'
     | '/documents'
+    | '/gantt'
     | '/jira'
     | '/my-work'
     | '/notifications'
@@ -347,6 +358,7 @@ export interface FileRouteTypes {
     | '/_authenticated/board'
     | '/_authenticated/dashboard'
     | '/_authenticated/documents'
+    | '/_authenticated/gantt'
     | '/_authenticated/jira'
     | '/_authenticated/my-work'
     | '/_authenticated/notifications'
@@ -489,6 +501,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDocumentsRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    '/_authenticated/gantt': {
+      id: '/_authenticated/gantt'
+      path: '/gantt'
+      fullPath: '/gantt'
+      preLoaderRoute: typeof AuthenticatedGanttRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
     '/_authenticated/jira': {
       id: '/_authenticated/jira'
       path: '/jira'
@@ -584,6 +603,7 @@ interface AuthenticatedRouteChildren {
   AuthenticatedBoardRoute: typeof AuthenticatedBoardRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedDocumentsRoute: typeof AuthenticatedDocumentsRoute
+  AuthenticatedGanttRoute: typeof AuthenticatedGanttRoute
   AuthenticatedJiraRoute: typeof AuthenticatedJiraRoute
   AuthenticatedMyWorkRoute: typeof AuthenticatedMyWorkRoute
   AuthenticatedNotificationsRoute: typeof AuthenticatedNotificationsRoute
@@ -604,6 +624,7 @@ const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedBoardRoute: AuthenticatedBoardRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedDocumentsRoute: AuthenticatedDocumentsRoute,
+  AuthenticatedGanttRoute: AuthenticatedGanttRoute,
   AuthenticatedJiraRoute: AuthenticatedJiraRoute,
   AuthenticatedMyWorkRoute: AuthenticatedMyWorkRoute,
   AuthenticatedNotificationsRoute: AuthenticatedNotificationsRoute,
