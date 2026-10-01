@@ -82,14 +82,7 @@ export function buildWorkLogEntriesCsv(
   ctx: ExportContext,
 ): (string | number)[][] {
   const rows: (string | number)[][] = metaRows(ctx, "SpaceScope — work log entries");
-  rows.push([
-    "Ticket key",
-    "Ticket title",
-    "Assignee",
-    "Logged by",
-    "Time logged",
-    "Hours",
-  ]);
+  rows.push(["Ticket key", "Ticket title", "Assignee", "Logged by", "Time logged", "Hours"]);
 
   const byPerson = new Map<string, ExportLog[]>();
   for (const l of logs) {
@@ -144,14 +137,7 @@ export function buildTicketsWorkedCsv(
   }
 
   const rows: (string | number)[][] = metaRows(ctx, "SpaceScope — tickets worked on");
-  rows.push([
-    "Ticket key",
-    "Ticket title",
-    "Assignee",
-    "Logged by",
-    "Time logged",
-    "Hours",
-  ]);
+  rows.push(["Ticket key", "Ticket title", "Assignee", "Logged by", "Time logged", "Hours"]);
 
   const grandTotals: [string, number][] = [];
   for (const [userId, perTicket] of byPerson.entries()) {
@@ -236,7 +222,10 @@ export const exportFilename = (
 ): string => {
   const datePart = `${fromDate}_to_${toDate}`;
   const personPart = personName
-    ? personName.trim().replace(/[^\p{L}\p{N}]+/gu, "-").replace(/^-+|-+$/g, "")
+    ? personName
+        .trim()
+        .replace(/[^\p{L}\p{N}]+/gu, "-")
+        .replace(/^-+|-+$/g, "")
     : "";
   return personPart
     ? `work-log-${personPart}-${kind}-${datePart}.csv`
