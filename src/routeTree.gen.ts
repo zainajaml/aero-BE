@@ -37,6 +37,7 @@ import { Route as AuthenticatedSprintStatusRouteImport } from './routes/_authent
 import { Route as AuthenticatedSuperAdminRouteImport } from './routes/_authenticated/super-admin'
 import { Route as AuthenticatedWorkforceRouteImport } from './routes/_authenticated/workforce'
 import { Route as BlogAiSprintPlanningRouteImport } from './routes/blog.ai-sprint-planning'
+import { Route as OauthConsentRouteImport } from './routes/oauth.consent'
 import { Route as TicketTicketIdRouteImport } from './routes/ticket.$ticketId'
 
 const IndexRoute = IndexRouteImport.update({
@@ -181,6 +182,11 @@ const BlogAiSprintPlanningRoute = BlogAiSprintPlanningRouteImport.update({
   path: '/blog/ai-sprint-planning',
   getParentRoute: () => rootRouteImport,
 } as any)
+const OauthConsentRoute = OauthConsentRouteImport.update({
+  id: '/oauth/consent',
+  path: '/oauth/consent',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TicketTicketIdRoute = TicketTicketIdRouteImport.update({
   id: '/ticket/$ticketId',
   path: '/ticket/$ticketId',
@@ -215,6 +221,7 @@ export interface FileRoutesByFullPath {
   '/super-admin': typeof AuthenticatedSuperAdminRoute
   '/workforce': typeof AuthenticatedWorkforceRoute
   '/blog/ai-sprint-planning': typeof BlogAiSprintPlanningRoute
+  '/oauth/consent': typeof OauthConsentRoute
   '/ticket/$ticketId': typeof TicketTicketIdRoute
 }
 export interface FileRoutesByTo {
@@ -245,6 +252,7 @@ export interface FileRoutesByTo {
   '/super-admin': typeof AuthenticatedSuperAdminRoute
   '/workforce': typeof AuthenticatedWorkforceRoute
   '/blog/ai-sprint-planning': typeof BlogAiSprintPlanningRoute
+  '/oauth/consent': typeof OauthConsentRoute
   '/ticket/$ticketId': typeof TicketTicketIdRoute
 }
 export interface FileRoutesById {
@@ -277,6 +285,7 @@ export interface FileRoutesById {
   '/_authenticated/super-admin': typeof AuthenticatedSuperAdminRoute
   '/_authenticated/workforce': typeof AuthenticatedWorkforceRoute
   '/blog/ai-sprint-planning': typeof BlogAiSprintPlanningRoute
+  '/oauth/consent': typeof OauthConsentRoute
   '/ticket/$ticketId': typeof TicketTicketIdRoute
 }
 export interface FileRouteTypes {
@@ -309,6 +318,7 @@ export interface FileRouteTypes {
     | '/super-admin'
     | '/workforce'
     | '/blog/ai-sprint-planning'
+    | '/oauth/consent'
     | '/ticket/$ticketId'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -339,6 +349,7 @@ export interface FileRouteTypes {
     | '/super-admin'
     | '/workforce'
     | '/blog/ai-sprint-planning'
+    | '/oauth/consent'
     | '/ticket/$ticketId'
   id:
     | '__root__'
@@ -370,6 +381,7 @@ export interface FileRouteTypes {
     | '/_authenticated/super-admin'
     | '/_authenticated/workforce'
     | '/blog/ai-sprint-planning'
+    | '/oauth/consent'
     | '/ticket/$ticketId'
   fileRoutesById: FileRoutesById
 }
@@ -384,6 +396,7 @@ export interface RootRouteChildren {
   SignupRoute: typeof SignupRoute
   UnsubscribeRoute: typeof UnsubscribeRoute
   BlogAiSprintPlanningRoute: typeof BlogAiSprintPlanningRoute
+  OauthConsentRoute: typeof OauthConsentRoute
   TicketTicketIdRoute: typeof TicketTicketIdRoute
 }
 
@@ -585,6 +598,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogAiSprintPlanningRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/oauth/consent': {
+      id: '/oauth/consent'
+      path: '/oauth/consent'
+      fullPath: '/oauth/consent'
+      preLoaderRoute: typeof OauthConsentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/ticket/$ticketId': {
       id: '/ticket/$ticketId'
       path: '/ticket/$ticketId'
@@ -652,6 +672,7 @@ const rootRouteChildren: RootRouteChildren = {
   SignupRoute: SignupRoute,
   UnsubscribeRoute: UnsubscribeRoute,
   BlogAiSprintPlanningRoute: BlogAiSprintPlanningRoute,
+  OauthConsentRoute: OauthConsentRoute,
   TicketTicketIdRoute: TicketTicketIdRoute,
 }
 export const routeTree = rootRouteImport

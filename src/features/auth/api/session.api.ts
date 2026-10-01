@@ -30,6 +30,53 @@ export async function signInWithPassword(email: string, password: string): Promi
   return toResult(error, "Couldn't sign you in.");
 }
 
+/** Result of a sign-in that continues an OAuth authorization: where the browser goes next. */
+export type RedirectResult =
+  { ok: true; url: string } | { ok: false; code: string; message: string };
+
+function toRedirect(
+  data: { url?: string } | null,
+  error: BetterAuthError,
+  fallback: string,
+): RedirectResult {
+  const result = toResult(error, fallback);
+  if (!result.ok) return result;
+  if (!data?.url) return { ok: false, code: "NO_REDIRECT", message: fallback };
+  return { ok: true, url: data.url };
+}
+
+/**
+ * Email sign-in during an MCP/OAuth authorization. `oauthQuery` is the signed query of the login
+ * page, sent unchanged; the server answers with the next step of the authorization.
+ */
+export async function signInWithPasswordForAuthorization(
+  email: string,
+  password: string,
+  oauthQuery: string,
+): Promise<RedirectResult> {
+  const { data, error } = await authClient.$fetch<{ url?: string }>("/sign-in/email", {
+    method: "POST",
+    body: { email: email.trim(), password, oauth_query: oauthQuery },
+  });
+  return toRedirect(data, error as BetterAuthError, "Couldn't sign you in.");
+}
+
+/** Google sign-in during an MCP/OAuth authorization; resolves to Google's sign-in URL. */
+export async function signInWithGoogleForAuthorization(
+  oauthQuery: string,
+): Promise<RedirectResult> {
+  const { data, error } = await authClient.$fetch<{ url?: string }>("/sign-in/social", {
+    method: "POST",
+    body: {
+      provider: "google",
+      callbackURL: appUrl("/login"),
+      errorCallbackURL: appUrl("/login?error=google"),
+      oauth_query: oauthQuery,
+    },
+  });
+  return toRedirect(data, error as BetterAuthError, "Google sign-in failed.");
+}
+
 export async function signUpWithPassword(input: {
   firstName: string;
   lastName: string;

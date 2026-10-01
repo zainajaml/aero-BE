@@ -10,13 +10,18 @@ import {
   requestPasswordReset,
   resendVerification,
   signInWithGoogle,
+  signInWithGoogleForAuthorization,
   signInWithPassword,
+  signInWithPasswordForAuthorization,
 } from "../api/session.api";
 import { AuthCard, GoogleIcon } from "../components/auth-card";
 import { authKeys, loadSession } from "../hooks/auth-queries";
 import { destinationFor } from "../lib/route-guards";
 
-export function LoginView({ initialError }: { initialError?: string }) {
+/** Present when the login is a step of an MCP/OAuth authorization (signed query on the URL). */
+type OAuthLogin = { query: string; clientName: string | null };
+
+export function LoginView({ initialError, oauth }: { initialError?: string; oauth?: OAuthLogin }) {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const [mode, setMode] = useState<"signin" | "forgot">("signin");
@@ -48,6 +53,17 @@ export function LoginView({ initialError }: { initialError?: string }) {
     setPwLoading(true);
     setError("");
     setUnverified(false);
+    if (oauth) {
+      const next = await signInWithPasswordForAuthorization(email, password, oauth.query);
+      if (!next.ok) {
+        setPwLoading(false);
+        setUnverified(next.code === "EMAIL_NOT_VERIFIED");
+        setError(next.message);
+        return;
+      }
+      window.location.href = next.url;
+      return;
+    }
     const result = await signInWithPassword(email, password);
     if (!result.ok) {
       setPwLoading(false);
@@ -61,6 +77,15 @@ export function LoginView({ initialError }: { initialError?: string }) {
 
   async function google() {
     setGoogleLoading(true);
+    if (oauth) {
+      const next = await signInWithGoogleForAuthorization(oauth.query);
+      if (next.ok) window.location.href = next.url;
+      else {
+        toast.error(next.message);
+        setGoogleLoading(false);
+      }
+      return;
+    }
     const result = await signInWithGoogle("/login");
     if (!result.ok) {
       toast.error(result.message);
@@ -109,7 +134,9 @@ export function LoginView({ initialError }: { initialError?: string }) {
         <p className="mt-1 text-sm text-muted-foreground">
           {mode === "forgot"
             ? "Enter your email and we'll send you a reset link."
-            : "Sign in to continue to Space Scope."}
+            : oauth
+              ? `Sign in to connect ${oauth.clientName ?? "an app"} to Space Scope.`
+              : "Sign in to continue to Space Scope."}
         </p>
       </div>
 
