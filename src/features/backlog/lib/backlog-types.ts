@@ -6,14 +6,7 @@ export type BacklogSprint = Sprint;
 export type BacklogColumn = BoardColumn;
 
 export type SortKey =
-  | "default"
-  | "manual"
-  | "epic"
-  | "priority"
-  | "complexity"
-  | "number"
-  | "name"
-  | "stage";
+  "default" | "manual" | "epic" | "priority" | "complexity" | "number" | "name" | "stage";
 
 export type SortDir = "asc" | "desc";
 
