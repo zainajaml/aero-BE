@@ -46,7 +46,11 @@ export function TicketTimeChart({
           >
             <XAxis dataKey="name" tick={{ fontSize: 11, fill: axisColor }} stroke={axisColor} />
             <YAxis tick={{ fontSize: 11, fill: axisColor }} stroke={axisColor} />
-            <Tooltip cursor={{ fill: "#333333" }} position={{ y: 0 }} content={<CompactTooltip />} />
+            <Tooltip
+              cursor={{ fill: "#333333" }}
+              position={{ y: 0 }}
+              content={<CompactTooltip />}
+            />
             <Legend wrapperStyle={{ fontSize: 11, color: axisColor }} />
             <Bar
               dataKey="Estimate"
@@ -106,7 +110,11 @@ export function TimeByDateChart({
           <BarChart data={data.rows} margin={MARGIN}>
             <XAxis dataKey="day" tick={{ fontSize: 11, fill: axisColor }} stroke={axisColor} />
             <YAxis tick={{ fontSize: 11, fill: axisColor }} stroke={axisColor} />
-            <Tooltip cursor={{ fill: "#333333" }} position={{ y: 0 }} content={<CompactTooltip />} />
+            <Tooltip
+              cursor={{ fill: "#333333" }}
+              position={{ y: 0 }}
+              content={<CompactTooltip />}
+            />
             <Legend wrapperStyle={{ fontSize: 11, color: axisColor }} />
             {data.people.map((p) => (
               <Bar
