@@ -22,6 +22,7 @@ import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/
 import { Route as AuthenticatedAuditRouteImport } from './routes/_authenticated/audit'
 import { Route as AuthenticatedBacklogRouteImport } from './routes/_authenticated/backlog'
 import { Route as AuthenticatedBillingRouteImport } from './routes/_authenticated/billing'
+import { Route as AuthenticatedBoardRouteImport } from './routes/_authenticated/board'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedDocumentsRouteImport } from './routes/_authenticated/documents'
 import { Route as AuthenticatedJiraRouteImport } from './routes/_authenticated/jira'
@@ -99,6 +100,11 @@ const AuthenticatedBacklogRoute = AuthenticatedBacklogRouteImport.update({
 const AuthenticatedBillingRoute = AuthenticatedBillingRouteImport.update({
   id: '/billing',
   path: '/billing',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedBoardRoute = AuthenticatedBoardRouteImport.update({
+  id: '/board',
+  path: '/board',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
 const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
@@ -188,6 +194,7 @@ export interface FileRoutesByFullPath {
   '/audit': typeof AuthenticatedAuditRoute
   '/backlog': typeof AuthenticatedBacklogRoute
   '/billing': typeof AuthenticatedBillingRoute
+  '/board': typeof AuthenticatedBoardRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/documents': typeof AuthenticatedDocumentsRoute
   '/jira': typeof AuthenticatedJiraRoute
@@ -216,6 +223,7 @@ export interface FileRoutesByTo {
   '/audit': typeof AuthenticatedAuditRoute
   '/backlog': typeof AuthenticatedBacklogRoute
   '/billing': typeof AuthenticatedBillingRoute
+  '/board': typeof AuthenticatedBoardRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/documents': typeof AuthenticatedDocumentsRoute
   '/jira': typeof AuthenticatedJiraRoute
@@ -246,6 +254,7 @@ export interface FileRoutesById {
   '/_authenticated/audit': typeof AuthenticatedAuditRoute
   '/_authenticated/backlog': typeof AuthenticatedBacklogRoute
   '/_authenticated/billing': typeof AuthenticatedBillingRoute
+  '/_authenticated/board': typeof AuthenticatedBoardRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/documents': typeof AuthenticatedDocumentsRoute
   '/_authenticated/jira': typeof AuthenticatedJiraRoute
@@ -276,6 +285,7 @@ export interface FileRouteTypes {
     | '/audit'
     | '/backlog'
     | '/billing'
+    | '/board'
     | '/dashboard'
     | '/documents'
     | '/jira'
@@ -304,6 +314,7 @@ export interface FileRouteTypes {
     | '/audit'
     | '/backlog'
     | '/billing'
+    | '/board'
     | '/dashboard'
     | '/documents'
     | '/jira'
@@ -333,6 +344,7 @@ export interface FileRouteTypes {
     | '/_authenticated/audit'
     | '/_authenticated/backlog'
     | '/_authenticated/billing'
+    | '/_authenticated/board'
     | '/_authenticated/dashboard'
     | '/_authenticated/documents'
     | '/_authenticated/jira'
@@ -456,6 +468,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedBillingRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    '/_authenticated/board': {
+      id: '/_authenticated/board'
+      path: '/board'
+      fullPath: '/board'
+      preLoaderRoute: typeof AuthenticatedBoardRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
     '/_authenticated/dashboard': {
       id: '/_authenticated/dashboard'
       path: '/dashboard'
@@ -562,6 +581,7 @@ interface AuthenticatedRouteChildren {
   AuthenticatedAuditRoute: typeof AuthenticatedAuditRoute
   AuthenticatedBacklogRoute: typeof AuthenticatedBacklogRoute
   AuthenticatedBillingRoute: typeof AuthenticatedBillingRoute
+  AuthenticatedBoardRoute: typeof AuthenticatedBoardRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedDocumentsRoute: typeof AuthenticatedDocumentsRoute
   AuthenticatedJiraRoute: typeof AuthenticatedJiraRoute
@@ -581,6 +601,7 @@ const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedAuditRoute: AuthenticatedAuditRoute,
   AuthenticatedBacklogRoute: AuthenticatedBacklogRoute,
   AuthenticatedBillingRoute: AuthenticatedBillingRoute,
+  AuthenticatedBoardRoute: AuthenticatedBoardRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedDocumentsRoute: AuthenticatedDocumentsRoute,
   AuthenticatedJiraRoute: AuthenticatedJiraRoute,
