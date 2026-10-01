@@ -26,6 +26,13 @@ export function avatarStyleFor(id: string) {
   return AVATAR_STYLES[hashString(id) % AVATAR_STYLES.length];
 }
 
+export function initialsFor(name: string) {
+  const parts = name.trim().split(/\s+/).filter(Boolean);
+  if (parts.length === 0) return "?";
+  if (parts.length === 1) return parts[0]!.slice(0, 2).toUpperCase();
+  return (parts[0]![0]! + parts[parts.length - 1]![0]!).toUpperCase();
+}
+
 const timeFmt = new Intl.DateTimeFormat(undefined, { hour: "numeric", minute: "2-digit" });
 const dayFmt = new Intl.DateTimeFormat(undefined, {
   weekday: "long",

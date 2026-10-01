@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { DocumentsView } from "@/features/documents/views/documents-view";
 
-// Placeholder while the page is being ported.
 export const Route = createFileRoute("/_authenticated/documents")({
-  component: () => null,
+  component: DocumentsView,
 });

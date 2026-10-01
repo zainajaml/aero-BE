@@ -30,7 +30,10 @@ export function useRefreshDocuments() {
 
 export function useCreateDocument(
   projectId: string | undefined,
-  onCreated: (doc: DocumentMeta, opts: { parentId: string | null; folderId: string | null }) => void,
+  onCreated: (
+    doc: DocumentMeta,
+    opts: { parentId: string | null; folderId: string | null },
+  ) => void,
 ) {
   const refresh = useRefreshDocuments();
   return useMutation({

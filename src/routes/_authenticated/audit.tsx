@@ -1,6 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { requireAuditAccess } from "@/features/admin/lib/route-guards";
+import { AuditView } from "@/features/audit/views/audit-view";
 
-// Placeholder while the page is being ported.
 export const Route = createFileRoute("/_authenticated/audit")({
-  component: () => null,
+  beforeLoad: ({ context }) => requireAuditAccess(context.queryClient),
+  component: () => <AuditView />,
 });

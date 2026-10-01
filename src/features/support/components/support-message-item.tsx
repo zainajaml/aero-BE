@@ -3,7 +3,6 @@ import { Pencil } from "lucide-react";
 import { Button } from "@/shared/ui/button";
 import { CTA_BUTTON } from "@/shared/lib/cta";
 import { cn } from "@/shared/lib/utils";
-import { UserAvatar } from "@/features/users/components/user-avatar";
 import {
   CommentContent,
   CommentEditor,
@@ -12,7 +11,8 @@ import {
 } from "@/features/rich-text/components/comment-editor";
 import type { SupportMessage } from "../api/support.api";
 import { useEditSupportMessage } from "../hooks/use-support-mutations";
-import { avatarStyleFor, fmtTime } from "../lib/support-format";
+import { fmtTime } from "../lib/support-format";
+import { SupportAvatar } from "./support-avatar";
 import type { SupportLightboxItem } from "./support-lightbox";
 import { SupportMessageAttachment } from "./support-message-attachment";
 
@@ -57,11 +57,11 @@ export function SupportMessageItem({
   const parsed = parseStoredComment(m.body);
   const name = mine ? "You" : m.author.name;
   const avatar = (
-    <UserAvatar
-      path={m.author.avatarUrl}
+    <SupportAvatar
+      id={m.authorId}
       name={name}
+      avatarPath={m.author.avatarUrl}
       className="h-6 w-6"
-      fallbackClassName={cn("text-[11px] font-semibold", avatarStyleFor(m.authorId))}
     />
   );
 

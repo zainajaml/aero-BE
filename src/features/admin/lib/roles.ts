@@ -14,7 +14,8 @@ export type RoleValue = (typeof ROLE_OPTIONS)[number]["value"];
 const CLIENT_ROLE_VALUES: RoleValue[] = ["admin", "developer", "team", "viewer"];
 export const isClientRole = (r: string) => (CLIENT_ROLE_VALUES as string[]).includes(r);
 
-export const roleLabel = (r: string | null) => ROLE_OPTIONS.find((o) => o.value === r)?.label ?? "—";
+export const roleLabel = (r: string | null) =>
+  ROLE_OPTIONS.find((o) => o.value === r)?.label ?? "—";
 
 /** Roles an admin may hand out (client admins: project roles only; Super Admin: super admins only). */
 export function assignableRoles(clientAdminOnly: boolean, currentUserIsSuperAdmin: boolean) {

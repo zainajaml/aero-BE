@@ -94,11 +94,7 @@ export function sortUsers(
   return [...users].sort((a, b) => value(a).localeCompare(value(b)) * dir);
 }
 
-export function matchesUserSearch(
-  u: OrgUser,
-  q: string,
-  helpers: ReturnType<typeof labelHelpers>,
-) {
+export function matchesUserSearch(u: OrgUser, q: string, helpers: ReturnType<typeof labelHelpers>) {
   return [
     nameOf(u),
     u.email || "",
@@ -146,7 +142,11 @@ export function expandUsers(
       // Account-wide members (e.g. Account Admins) have no project rows but
       // belong to the account currently in context.
       const accountScoped = !!activeAccountId && u.accountIds.includes(activeAccountId);
-      if (showAllUsers || accountScoped || ((!activeProjectId || isAllProjects) && !accountFilterId)) {
+      if (
+        showAllUsers ||
+        accountScoped ||
+        ((!activeProjectId || isAllProjects) && !accountFilterId)
+      ) {
         rows.push({
           ...u,
           rowProjectLabel: accountScoped ? "All projects" : helpers.projectsLabel(u),
@@ -195,7 +195,11 @@ export function expandInvitations(
     } else {
       for (const pid of inv.projectIds) {
         if (!helpers.projectMatchesScope(pid, ctx)) continue;
-        rows.push({ ...inv, rowProjectLabel: helpers.projectName(pid), rowKey: `${inv.id}:${pid}` });
+        rows.push({
+          ...inv,
+          rowProjectLabel: helpers.projectName(pid),
+          rowKey: `${inv.id}:${pid}`,
+        });
       }
     }
   }

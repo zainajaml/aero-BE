@@ -43,7 +43,11 @@ export function useUpdateAccount(accountId: string | null, onDone: () => void) {
 
 export function useDeleteAccount(
   accountId: string | null,
-  { force, successMessage, onDone }: { force: boolean; successMessage: () => string; onDone?: () => void },
+  {
+    force,
+    successMessage,
+    onDone,
+  }: { force: boolean; successMessage: () => string; onDone?: () => void },
 ) {
   const queryClient = useQueryClient();
   return useMutation({

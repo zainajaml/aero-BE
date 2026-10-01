@@ -19,6 +19,7 @@ import { GlassPanel } from "@/shared/ui/glass/glass-panel";
 
 import { SidebarProfileMenu } from "@/features/users/components/sidebar-profile-menu";
 import { NotificationsNavItem } from "@/features/notifications/components/notifications-nav-item";
+import { SupportWidget } from "@/features/support/components/support-widget";
 
 import { ProjectSwitcher } from "@/features/projects/components/project-switcher";
 import { AccountSwitcher } from "@/features/projects/components/account-switcher";
@@ -217,6 +218,7 @@ export function AppShell({ children }: { children: ReactNode }) {
             />
             <div className="flex flex-col gap-0.5">
               <NotificationsNavItem />
+              <SupportWidget variant="menu" />
               <SettingsLink />
               <SidebarProfileMenu />
             </div>
@@ -259,6 +261,7 @@ export function AppShell({ children }: { children: ReactNode }) {
                     />
                     <div className="flex flex-col gap-0.5">
                       <NotificationsNavItem onNavigate={() => setMobileOpen(false)} />
+                      <SupportWidget variant="menu" onNavigate={() => setMobileOpen(false)} />
                       <SettingsLink onNavigate={() => setMobileOpen(false)} />
                       <SidebarProfileMenu onNavigate={() => setMobileOpen(false)} />
                     </div>

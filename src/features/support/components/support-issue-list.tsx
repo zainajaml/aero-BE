@@ -75,7 +75,11 @@ export function SupportIssueList({
           className="h-8 gap-1.5 rounded-full text-xs"
           onClick={() => setShowClosed((v) => !v)}
         >
-          {showClosed ? <CheckSquare className="h-3.5 w-3.5" /> : <Square className="h-3.5 w-3.5" />}
+          {showClosed ? (
+            <CheckSquare className="h-3.5 w-3.5" />
+          ) : (
+            <Square className="h-3.5 w-3.5" />
+          )}
           {showClosed ? "Hide closed" : "Show closed"}
         </Button>
         <span className="ml-auto text-xs text-muted-foreground">

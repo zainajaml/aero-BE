@@ -56,5 +56,8 @@ export const restoreUser = (userId: string) =>
 /** Sets the real email of a Jira-imported placeholder identity. */
 export const setImportedUserEmail = (userId: string, email: string) =>
   unwrap(
-    api.PUT("/api/v1/admin/users/{userId}/email", { params: { path: { userId } }, body: { email } }),
+    api.PUT("/api/v1/admin/users/{userId}/email", {
+      params: { path: { userId } },
+      body: { email },
+    }),
   );
