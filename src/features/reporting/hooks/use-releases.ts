@@ -29,7 +29,12 @@ export function useReleases(projectId: string | undefined, enabled: boolean) {
   const ticketsQuery = useQuery({
     queryKey: reportingKeys.reportTickets({ sprintIds }),
     enabled: enabled && sprintIds.length > 0,
-    queryFn: () => listReportTickets({ sprintIds }),
+    // The endpoint caps id filters at 500, so fetch in chunks.
+    queryFn: async () => {
+      const chunks: string[][] = [];
+      for (let i = 0; i < sprintIds.length; i += 500) chunks.push(sprintIds.slice(i, i + 500));
+      return (await Promise.all(chunks.map((c) => listReportTickets({ sprintIds: c })))).flat();
+    },
   });
 
   const ticketsBySprint = useMemo(() => {
