@@ -1,0 +1,43 @@
+/** Client-side catalogue of notification triggers (the API stores only key → enabled). */
+export interface NotificationTrigger {
+  key: string;
+  category: string;
+  trigger: string;
+  recipient: string;
+  notification: string;
+}
+
+export const NOTIF_ROWS: NotificationTrigger[] = [
+  { key: "ticket-assigned", category: "Ticket Notifications", trigger: "Ticket assigned", recipient: "Assignee", notification: "Ticket ABC-123 has been assigned to you." },
+  { key: "ticket-unassigned", category: "Ticket Notifications", trigger: "Ticket unassigned", recipient: "Previous assignee", notification: "You have been unassigned from Ticket ABC-123." },
+  { key: "ticket-reassigned", category: "Ticket Notifications", trigger: "Ticket reassigned", recipient: "Old & New Assignee", notification: "Ticket ABC-123 has been reassigned." },
+  { key: "ticket-status-changed", category: "Ticket Notifications", trigger: "Ticket status changed", recipient: "Assignee, Reporter, Watchers", notification: "Ticket ABC-123 moved from In Progress to Ready for Testing." },
+  { key: "ticket-priority-changed", category: "Ticket Notifications", trigger: "Ticket priority changed", recipient: "Assignee, Watchers", notification: "Priority updated from Medium to High." },
+  { key: "ticket-due-date-changed", category: "Ticket Notifications", trigger: "Ticket due date changed", recipient: "Assignee", notification: "Due date updated to June 20." },
+  { key: "ticket-estimate-changed", category: "Ticket Notifications", trigger: "Ticket estimate changed", recipient: "Assignee, PM", notification: "Estimated hours changed from 8 to 12." },
+  { key: "ticket-deleted", category: "Ticket Notifications", trigger: "Ticket deleted", recipient: "Assignee, Reporter", notification: "Ticket ABC-123 was deleted." },
+  { key: "ticket-reopened", category: "Ticket Notifications", trigger: "Ticket reopened", recipient: "Assignee, Reporter", notification: "Ticket ABC-123 has been reopened." },
+  { key: "ticket-completed", category: "Ticket Notifications", trigger: "Ticket completed", recipient: "Reporter, Watchers", notification: "Ticket ABC-123 has been marked complete." },
+  { key: "user-tagged", category: "Comments & Collaboration", trigger: "User tagged (@mention)", recipient: "Tagged User", notification: "Ahmed mentioned you in Ticket ABC-123." },
+  { key: "comment-added", category: "Comments & Collaboration", trigger: "Comment added", recipient: "Watchers, Assignee", notification: "New comment added to Ticket ABC-123." },
+  { key: "comment-reply", category: "Comments & Collaboration", trigger: "Reply to your comment", recipient: "Original Commenter", notification: "Someone replied to your comment." },
+  { key: "reaction-added", category: "Comments & Collaboration", trigger: "Reaction added", recipient: "Comment Owner", notification: "Sarah reacted to your comment." },
+  { key: "file-attached", category: "Comments & Collaboration", trigger: "File attached", recipient: "Assignee, Watchers", notification: "New file uploaded to Ticket ABC-123." },
+  { key: "checklist-assigned", category: "Comments & Collaboration", trigger: "Checklist item assigned", recipient: "Assigned User", notification: "You have been assigned a checklist item." },
+  { key: "checklist-completed", category: "Comments & Collaboration", trigger: "Checklist item completed", recipient: "Ticket Owner", notification: "Checklist item completed." },
+  { key: "sprint-started", category: "Sprint Notifications", trigger: "Sprint started", recipient: "Sprint Members", notification: "Sprint June Sprint 3 has started." },
+  { key: "sprint-ending-soon", category: "Sprint Notifications", trigger: "Sprint ending soon", recipient: "Sprint Members", notification: "Sprint ends in 2 days." },
+  { key: "sprint-completed", category: "Sprint Notifications", trigger: "Sprint completed", recipient: "Sprint Members, PM", notification: "Sprint June Sprint 3 completed." },
+  { key: "sprint-goal-at-risk", category: "Sprint Notifications", trigger: "Sprint goal at risk", recipient: "PM, Managers", notification: "Sprint completion is below target." },
+  { key: "ticket-added-to-sprint", category: "Sprint Notifications", trigger: "Ticket added to active sprint", recipient: "Assignee", notification: "Ticket added to current sprint." },
+  { key: "ticket-removed-from-sprint", category: "Sprint Notifications", trigger: "Ticket removed from sprint", recipient: "Assignee", notification: "Ticket removed from sprint." },
+  { key: "worklog-submitted", category: "Worklog Notifications", trigger: "Worklog submitted", recipient: "PM (Optional)", notification: "Ahmed logged 4 hours on Ticket ABC-123." },
+  { key: "worklog-edited", category: "Worklog Notifications", trigger: "Worklog edited", recipient: "PM", notification: "Worklog updated on Ticket ABC-123." },
+  { key: "worklog-missing", category: "Worklog Notifications", trigger: "Missing worklog", recipient: "Resource", notification: "Reminder: No worklog submitted today." },
+  { key: "worklog-incomplete", category: "Worklog Notifications", trigger: "Daily worklog incomplete", recipient: "Resource", notification: "Please complete your worklog before end of day." },
+  { key: "worklog-exceed-estimate", category: "Worklog Notifications", trigger: "Logged hours exceed estimate", recipient: "PM, Assignee", notification: "Logged hours have exceeded estimate." },
+  { key: "ticket-not-updated", category: "Accountability Notifications", trigger: "Ticket not updated for X days", recipient: "Assignee", notification: "Ticket ABC-123 has not been updated in 3 days." },
+  { key: "missing-description", category: "Accountability Notifications", trigger: "Missing ticket description", recipient: "Ticket Creator", notification: "Description is required before work begins." },
+  { key: "missing-worklog-notes", category: "Accountability Notifications", trigger: "Missing worklog notes", recipient: "Resource", notification: "Worklog notes are required." },
+  { key: "ticket-stuck", category: "Accountability Notifications", trigger: "Ticket stuck in status", recipient: "Assignee, PM", notification: "Ticket ABC-123 has been In Progress for 8 days." },
+];
