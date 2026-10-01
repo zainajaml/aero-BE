@@ -1,6 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { requireSuperAdmin } from "@/features/admin/lib/route-guards";
+import { SuperAdminView } from "@/features/admin/views/super-admin-view";
 
-// Placeholder while the page is being ported.
 export const Route = createFileRoute("/_authenticated/super-admin")({
-  component: () => null,
+  beforeLoad: ({ context }) => requireSuperAdmin(context.queryClient),
+  head: () => ({ meta: [{ title: "Super Admin · Space Scope" }] }),
+  component: SuperAdminView,
 });
