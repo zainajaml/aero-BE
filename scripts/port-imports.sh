@@ -33,3 +33,15 @@ for f in "$@"; do
     -e 's#"@/components/projects/(archived-project-banner|no-project-empty-state)"#"@/features/projects/components/\1"#g' \
     "$f"
 done
+# Ticket domain (tickets / backlog / board slice).
+for f in "$@"; do
+  sed -i -E \
+    -e 's#"@/components/tickets/(ticket-card|ticket-code|complexity-bars)"#"@/features/tickets/components/\1"#g' \
+    -e 's#"@/components/tickets/epic-tag-input"#"@/features/tickets/components/epics/epic-tag-input"#g' \
+    -e 's#"@/components/epics/manage-epics-dialog"#"@/features/tickets/components/epics/manage-epics-dialog"#g' \
+    -e 's#"@/components/tickets/ticket-dialog"#"@/features/tickets/components/ticket-dialog/ticket-dialog"#g' \
+    -e 's#"@/components/tickets/create-ticket-dialog"#"@/features/tickets/components/create-ticket/create-ticket-dialog"#g' \
+    -e 's#"@/components/tickets/bulk-edit-tickets-dialog"#"@/features/tickets/components/bulk-edit/bulk-edit-tickets-dialog"#g' \
+    -e 's#"@/lib/rate-card-roles"#"@/features/tickets/hooks/use-rate-card-roles"#g' \
+    "$f"
+done
