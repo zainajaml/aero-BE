@@ -33,3 +33,21 @@ Builds never read the backend repository.
 `npm run typecheck`, `npm run lint`, `npm run format:check`, `npm test` (Vitest unit tests for pure
 modules), `npm run build`, `npm run deps:cycles`, `npm run deps:unused` (knip). CI runs all of them
 (`.github/workflows/ci.yml`). Browser journeys: see `e2e/README.md`.
+
+## MCP sign-in
+
+MCP clients (Claude and others) authorize against the backend's OAuth server. The backend sends the
+browser to `/login?…&sig=…` when there is no session (the login form then continues the
+authorization) and to `/oauth/consent?…` for approval. Both pages pass the signed query back
+unchanged as `oauth_query`.
+
+## Docker
+
+```bash
+docker build -t aero-zenith-flow-frontend:local .            # --build-arg VITE_API_URL=https://api.example.com for a split origin
+docker run -p 8080:80 -e API_UPSTREAM=http://api:4000 aero-zenith-flow-frontend:local
+```
+
+nginx serves `dist` with an SPA fallback (`index.html` is never cached, `/assets/*` is cached for a
+year) and proxies `/api`, `/mcp` and `/.well-known/oauth-*` to `API_UPSTREAM` (default
+`http://api:4000`), so the app and API share one origin. `/healthz` answers `ok`.

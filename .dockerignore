@@ -1,0 +1,17 @@
+node_modules
+dist
+coverage
+test-results
+playwright-report
+.tanstack
+.env
+.env.*
+!.env.example
+.git
+.github
+.vscode
+.idea
+*.log
+Dockerfile
+.dockerignore
+e2e
