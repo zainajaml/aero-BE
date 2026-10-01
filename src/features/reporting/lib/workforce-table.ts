@@ -3,14 +3,7 @@ import type { Utilization } from "../api/reporting.api";
 export type UtilizationMember = Utilization["members"][number];
 
 export type SortKey =
-  | "name"
-  | "jobTitle"
-  | "role"
-  | "projects"
-  | "tickets"
-  | "available"
-  | "logged"
-  | "utilization";
+  "name" | "jobTitle" | "role" | "projects" | "tickets" | "available" | "logged" | "utilization";
 export type SortDir = "asc" | "desc";
 
 export const COLUMNS: { key: SortKey; label: string; w: string; align?: string }[] = [

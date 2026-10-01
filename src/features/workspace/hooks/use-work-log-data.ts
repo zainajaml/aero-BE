@@ -1,10 +1,5 @@
 import { useMemo } from "react";
-import {
-  keepPreviousData,
-  useQueries,
-  useQuery,
-  type UseQueryResult,
-} from "@tanstack/react-query";
+import { keepPreviousData, useQueries, useQuery, type UseQueryResult } from "@tanstack/react-query";
 import {
   listPeople,
   listProjectColumns,
@@ -59,7 +54,9 @@ function useScopeColumns(projectIds: string[]) {
 async function ticketsByIds(projectIds: string[] | undefined, ids: string[]) {
   const chunks: string[][] = [];
   for (let i = 0; i < ids.length; i += ID_CHUNK) chunks.push(ids.slice(i, i + ID_CHUNK));
-  const pages = await Promise.all(chunks.map((chunk) => listReportTickets({ projectIds, ids: chunk })));
+  const pages = await Promise.all(
+    chunks.map((chunk) => listReportTickets({ projectIds, ids: chunk })),
+  );
   return pages.flat();
 }
 

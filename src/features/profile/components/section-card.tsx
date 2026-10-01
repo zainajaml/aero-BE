@@ -78,13 +78,7 @@ export function SectionCard({
 }
 
 /** Stacked label-over-value/field row. */
-export function StackField({
-  label,
-  children,
-}: {
-  label: string;
-  children: React.ReactNode;
-}) {
+export function StackField({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div className="space-y-1">
       <Label className="text-[11px] uppercase tracking-wide text-muted-foreground">{label}</Label>

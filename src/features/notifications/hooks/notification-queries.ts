@@ -12,6 +12,7 @@ export const notificationKeys = {
   list: (query: ListNotificationsQuery) => [...notificationKeys.lists(), query] as const,
   detail: (id: string) => [...notificationKeys.all, "detail", id] as const,
   unseen: (since: string | undefined) => [...notificationKeys.all, "unseen", since ?? ""] as const,
+  unsubscribe: (token: string) => [...notificationKeys.all, "unsubscribe", token] as const,
 };
 
 export function useNotificationLog(query: ListNotificationsQuery) {

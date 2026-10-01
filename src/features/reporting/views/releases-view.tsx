@@ -32,7 +32,10 @@ export function ReleasesView() {
   const loading = projectsLoading || isLoading;
 
   const handleDownloadAll = () => {
-    downloadCsv(buildReleaseCsv(sprints, ticketsBySprint, formatEndDate), allReleaseNotesFilename());
+    downloadCsv(
+      buildReleaseCsv(sprints, ticketsBySprint, formatEndDate),
+      allReleaseNotesFilename(),
+    );
   };
 
   const handleDownloadSprint = (sprint: SprintReportRow) => {

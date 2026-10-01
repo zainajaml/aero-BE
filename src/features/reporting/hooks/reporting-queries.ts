@@ -19,8 +19,9 @@ export const reportingKeys = {
   reportableUsers: (projectIds: readonly string[] | undefined) =>
     [...reportingKeys.all, "reportable-users", ids(projectIds)] as const,
   rag: (projectId: string | undefined) => [...reportingKeys.all, "rag", projectId] as const,
-  commentSummary: (ticketId: string) =>
-    [...reportingKeys.all, "comment-summary", ticketId] as const,
+  /** Includes the comment count so a new comment triggers a fresh summary. */
+  commentSummary: (ticketId: string, commentCount: number) =>
+    [...reportingKeys.all, "comment-summary", ticketId, commentCount] as const,
   utilization: (projectId: string | undefined, from: string, to: string) =>
     [...reportingKeys.all, "utilization", projectId, from, to] as const,
 };
