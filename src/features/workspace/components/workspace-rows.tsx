@@ -69,7 +69,7 @@ export function ProjectRow({
   );
 }
 
-export function Metric({ label, value }: { label: string; value: number | string }) {
+function Metric({ label, value }: { label: string; value: number | string }) {
   return (
     <div className="w-[74px] shrink-0 text-right text-[11px] text-muted-foreground last:w-[70px]">
       <span className="font-semibold tabular-nums text-foreground">{value}</span> {label}

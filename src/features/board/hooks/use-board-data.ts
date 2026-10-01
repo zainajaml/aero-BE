@@ -59,5 +59,3 @@ export function useBoardData(projectId: string | null | undefined) {
     };
   }, [columns, rawSprints, rawTickets, people]);
 }
-
-export type BoardData = ReturnType<typeof useBoardData>;

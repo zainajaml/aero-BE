@@ -647,36 +647,6 @@ export function commentDocHasContent(doc: unknown): boolean {
   return found;
 }
 
-/** Collect mentioned user ids (mention node attrs.id) from a comment doc. */
-export function extractMentionIdsFromDoc(doc: unknown): string[] {
-  const ids = new Set<string>();
-  walk(doc, (n) => {
-    if (n.type === "mention" && typeof n.attrs?.id === "string") ids.add(n.attrs.id as string);
-  });
-  return [...ids];
-}
-
-/** Flatten a comment doc to plain text (used for email previews). */
-export function commentDocToText(doc: unknown): string {
-  const lines: string[] = [];
-  let current = "";
-  const flush = () => {
-    lines.push(current);
-    current = "";
-  };
-  walk(doc, (n) => {
-    if (n.type === "paragraph" || n.type === "heading") {
-      if (current) flush();
-    } else if (typeof n.text === "string") {
-      current += n.text;
-    } else if (n.type === "mention" && typeof n.attrs?.label === "string") {
-      current += `@${n.attrs.label as string}`;
-    }
-  });
-  if (current) flush();
-  return lines.join("\n").trim();
-}
-
 const RICH_PREFIX = "";
 
 /** Serialize a comment doc for storage in the text `body` column. */

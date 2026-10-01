@@ -3,7 +3,6 @@ import type { components } from "@/shared/api/schema.gen";
 
 export type UpdateMyProfileRequest = components["schemas"]["UpdateMyProfileRequest"];
 export type PrivateProfile = components["schemas"]["PrivateProfile"];
-export type TimeOff = components["schemas"]["TimeOff"];
 
 export const updateMyProfile = (body: UpdateMyProfileRequest) =>
   unwrap(api.PATCH("/api/v1/me/profile", { body }));

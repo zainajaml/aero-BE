@@ -27,8 +27,5 @@ export const SPRINT_GAP = 12;
 /** Height of one ticket row (incl. gap), used for the live drag preview offset. */
 export const ROW_PREVIEW_HEIGHT = 56;
 
-/** "backlog" zone id, or the sprint id. */
-export const zoneIdForTicket = (sprintId: string | null) => sprintId ?? "backlog";
-
 /** Tickets can never be assigned into a sprint that has already been completed. */
 export const COMPLETED_SPRINT_MSG = "You cannot assign tickets to completed sprints";

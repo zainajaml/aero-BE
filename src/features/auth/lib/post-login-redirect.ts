@@ -43,13 +43,3 @@ export function consumePostLoginRedirect(): string | null {
   claimed = true;
   return isUsable(dest) ? dest : null;
 }
-
-/** True when a usable deep link is still waiting to be consumed. */
-export function hasPostLoginRedirect(): boolean {
-  if (typeof window === "undefined" || claimed) return false;
-  try {
-    return isUsable(sessionStorage.getItem(KEY));
-  } catch {
-    return false;
-  }
-}

@@ -3,7 +3,7 @@ import type { components } from "@/shared/api/schema.gen";
 
 export type SupportIssue = components["schemas"]["SupportIssue"];
 export type SupportIssueStatus = SupportIssue["status"];
-export type SupportIssueDetail = components["schemas"]["SupportIssueDetail"];
+type SupportIssueDetail = components["schemas"]["SupportIssueDetail"];
 export type SupportMessage = SupportIssueDetail["messages"][number];
 
 export const listSupportIssues = (query: { status?: SupportIssueStatus; sort?: "asc" | "desc" }) =>

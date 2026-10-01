@@ -48,7 +48,7 @@ const AuthContext = createContext<AuthState | undefined>(undefined);
  *  3. the project role for the active project.
  * There is deliberately no fallback to stale account-level roles.
  */
-export function resolveEffectiveRoles(input: {
+function resolveEffectiveRoles(input: {
   globalRoles: AppRole[];
   adminAccountIds: string[];
   projectRoles: Record<string, AppRole>;

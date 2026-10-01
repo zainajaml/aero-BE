@@ -1,7 +1,4 @@
 import { api, unwrap } from "@/shared/api/client";
-import type { components } from "@/shared/api/schema.gen";
-
-export type UnsubscribeStatus = components["schemas"]["UnsubscribeStatus"];
 
 /** Checks an unsubscribe link (public). A 404 ApiError means the token is invalid. */
 export const checkUnsubscribe = (token: string) =>

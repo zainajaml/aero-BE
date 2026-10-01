@@ -167,5 +167,3 @@ export function useWorkLogData({
     loading: hasScope && (ticketsLoading || logsLoading),
   };
 }
-
-export type WorkLogData = ReturnType<typeof useWorkLogData>;

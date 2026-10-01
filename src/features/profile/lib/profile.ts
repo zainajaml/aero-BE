@@ -17,10 +17,6 @@ export const TIME_OFF_KINDS = [
 
 export type TimeOffKind = (typeof TIME_OFF_KINDS)[number]["value"];
 
-export function employmentLabel(value: string | null | undefined): string {
-  return EMPLOYMENT_STATUSES.find((s) => s.value === value)?.label ?? "—";
-}
-
 const AVATAR_MAX_PX = 512;
 
 /**

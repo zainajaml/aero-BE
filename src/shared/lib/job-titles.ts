@@ -1,5 +1,5 @@
 // Common IT job titles for team members. Client-safe (no server imports).
-export const IT_JOB_TITLES = [
+const IT_JOB_TITLES = [
   "Backend Developer",
   "Business Analyst",
   "Cloud Architect",
@@ -27,10 +27,8 @@ export const IT_JOB_TITLES = [
   "UI/UX Designer",
 ] as const;
 
-export type ITJobTitle = (typeof IT_JOB_TITLES)[number];
-
 // Classic business / operational roles for non-developer team members.
-export const BUSINESS_JOB_TITLES = [
+const BUSINESS_JOB_TITLES = [
   "Account Executive",
   "Accountant",
   "Administrative Assistant",
@@ -61,8 +59,6 @@ export const BUSINESS_JOB_TITLES = [
   "Team Lead",
   "Vice President",
 ] as const;
-
-export type BusinessJobTitle = (typeof BUSINESS_JOB_TITLES)[number];
 
 export function jobTitlesForRole(role: string): readonly string[] {
   if (role === "developer") return IT_JOB_TITLES;

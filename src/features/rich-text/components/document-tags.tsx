@@ -199,7 +199,7 @@ export function bindDocMentionClicks(dom: HTMLElement) {
 // ---------- Plain-text document tags (work log notes) ----------
 
 /** Storage token for a document tag inside a plain text field. */
-export const DOC_TAG_REGEX = /#\[([^\]]+)\]\(([0-9a-fA-F-]{36})\)/g;
+const DOC_TAG_REGEX = /#\[([^\]]+)\]\(([0-9a-fA-F-]{36})\)/g;
 
 export function formatDocTag(doc: DocumentTag) {
   return `#[${doc.title}](${doc.id})`;

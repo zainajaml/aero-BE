@@ -157,7 +157,7 @@ function setUploadStatus(editor: Editor, uploadId: string, status: string) {
   );
 }
 
-export function removeUploadNode(editor: Editor, uploadId: string) {
+function removeUploadNode(editor: Editor, uploadId: string) {
   const pos = findUploadNode(editor, uploadId);
   if (pos === null) return;
   const node = editor.state.doc.nodeAt(pos);
@@ -230,7 +230,7 @@ async function runUpload(editor: Editor, uploadId: string, file: File) {
   }
 }
 
-export async function retryUpload(editor: Editor, uploadId: string) {
+async function retryUpload(editor: Editor, uploadId: string) {
   const file = pendingFiles.get(uploadId);
   if (!file) {
     removeUploadNode(editor, uploadId);

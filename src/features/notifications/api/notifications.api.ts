@@ -2,8 +2,6 @@ import { api, unwrap } from "@/shared/api/client";
 import type { components, operations } from "@/shared/api/schema.gen";
 
 export type NotificationRow = components["schemas"]["NotificationRow"];
-export type NotificationDetail = components["schemas"]["NotificationDetail"];
-export type NotificationLog = components["schemas"]["NotificationLog"];
 export type ListNotificationsQuery = NonNullable<
   operations["listNotifications"]["parameters"]["query"]
 >;

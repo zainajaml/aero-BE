@@ -1,7 +1,7 @@
 # aero-zenith-flow-frontend
 
-React 19 + Vite single-page app for Space Scope, migrated from the Lovable/TanStack Start source
-(`aero-zenith-flow`). It talks only to the `aero-zenith-flow-backend` API.
+React 19 + Vite single-page app for Space Scope. It talks only to the `aero-zenith-flow-backend`
+API.
 
 ## Local development
 
@@ -24,10 +24,12 @@ Builds never read the backend repository.
 ## Layout
 
 - `src/app` — bootstrap, router, query client.
-- `src/routes` — thin TanStack Router file routes (same paths as the source app).
+- `src/routes` — thin TanStack Router file routes.
 - `src/features/<domain>` — `api/` (typed calls through the shared client), `hooks/`, `components/`, `views/`.
 - `src/shared` — API client with interceptors, UI primitives (shadcn), utilities.
 
 ## Checks
 
-`npm run typecheck`, `npm run lint`, `npm test`, `npm run build`, `npm run deps:cycles`, `npm run deps:unused`.
+`npm run typecheck`, `npm run lint`, `npm run format:check`, `npm test` (Vitest unit tests for pure
+modules), `npm run build`, `npm run deps:cycles`, `npm run deps:unused` (knip). CI runs all of them
+(`.github/workflows/ci.yml`). Browser journeys: see `e2e/README.md`.

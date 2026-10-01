@@ -4,3 +4,6 @@ src/routeTree.gen.ts
 src/shared/api/schema.gen.ts
 openapi
 package-lock.json
+test-results
+playwright-report
+.tanstack

@@ -28,7 +28,7 @@ export const TIMEZONES: TzInfo[] = [
 const DEFAULT_TZ: TzCode = "PKT";
 const STORAGE_KEY = "aero-timezone";
 
-export function tzInfo(code: TzCode): TzInfo {
+function tzInfo(code: TzCode): TzInfo {
   return TIMEZONES.find((t) => t.code === code) ?? TIMEZONES[0];
 }
 

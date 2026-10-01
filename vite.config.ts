@@ -1,3 +1,4 @@
+/// <reference types="vitest/config" />
 import path from "node:path";
 import tailwindcss from "@tailwindcss/vite";
 import { tanstackRouter } from "@tanstack/router-plugin/vite";
@@ -30,5 +31,7 @@ export default defineConfig(({ mode }) => {
       },
     },
     build: { sourcemap: true },
+    // Unit tests for pure modules; browser journeys in e2e/ run under Playwright.
+    test: { include: ["src/**/*.test.ts"], environment: "node" },
   };
 });

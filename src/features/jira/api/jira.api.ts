@@ -1,12 +1,7 @@
 import { api, unwrap } from "@/shared/api/client";
 import type { components } from "@/shared/api/schema.gen";
-
-export type JiraStatus = components["schemas"]["JiraStatus"];
-export type JiraSite = components["schemas"]["JiraSite"];
 export type JiraProject = components["schemas"]["JiraProject"];
 export type JiraImportProgress = components["schemas"]["JiraImportProgress"];
-export type JiraImportedUser = JiraImportProgress["jiraUsers"][number];
-export type JiraImportCandidate = components["schemas"]["JiraImportCandidate"];
 export type JiraStartImportRequest = components["schemas"]["JiraStartImportRequest"];
 export type JiraAssignMapping =
   components["schemas"]["JiraAssignImportUsersRequest"]["mappings"][number];
@@ -23,8 +18,6 @@ export const selectJiraSite = (cloudId: string) =>
 
 /* Browse */
 export const listJiraProjects = () => unwrap(api.GET("/api/v1/jira/projects"));
-export const searchJiraIssues = (projectKey: string, query?: string) =>
-  unwrap(api.GET("/api/v1/jira/issues", { params: { query: { projectKey, query } } }));
 
 /* Import */
 export const checkJiraProjectImported = (
@@ -57,15 +50,5 @@ export const inviteJiraImportedUsers = (importId: string, emails: string[]) =>
     api.POST("/api/v1/jira/imports/{importId}/invite-users", {
       params: { path: { importId } },
       body: { emails },
-    }),
-  );
-export const repairJiraImportAttribution = (
-  importId: string,
-  body: components["schemas"]["JiraRepairAttributionRequest"],
-) =>
-  unwrap(
-    api.POST("/api/v1/jira/imports/{importId}/repair-attribution", {
-      params: { path: { importId } },
-      body,
     }),
   );

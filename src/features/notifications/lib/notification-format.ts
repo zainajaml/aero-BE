@@ -11,7 +11,7 @@ export function humanizeTemplate(name: string) {
   return name.replace(/[-_]+/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
 }
 
-export const FAILED_STATUSES = new Set(["dlq", "failed", "bounced", "complained"]);
+const FAILED_STATUSES = new Set(["dlq", "failed", "bounced", "complained"]);
 
 /** Delivery outcome shown to admins, collapsed into four plain-language states. */
 export function statusMeta(status: string) {

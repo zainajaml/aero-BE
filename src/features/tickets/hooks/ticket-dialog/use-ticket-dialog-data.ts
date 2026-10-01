@@ -19,8 +19,7 @@ import {
   useTicketWorkLogs,
 } from "../ticket-queries";
 
-export const SPRINT_LOCKED_MSG =
-  "This ticket is in a closed sprint. Re-open the sprint to make changes.";
+const SPRINT_LOCKED_MSG = "This ticket is in a closed sprint. Re-open the sprint to make changes.";
 
 /**
  * Everything the open ticket modal reads besides the ticket's own children:

@@ -3,7 +3,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/shared/ui/di
 import { CloseButton } from "@/shared/ui/close-button";
 import { MediaImage } from "@/shared/ui/media-image";
 
-export type PreviewType = "image" | "pdf" | "text";
+type PreviewType = "image" | "pdf" | "text";
 
 /** A file shown in the preview viewer; `url` is null while its link is being prepared. */
 export interface PreviewAttachment {
@@ -34,7 +34,7 @@ function filePreviewType(name: string): PreviewType | "other" {
 }
 
 /** Derive a filename with extension from a signed URL so preview type detection works. */
-export function fileNameFromUrl(url: string): string {
+function fileNameFromUrl(url: string): string {
   try {
     const pathname = new URL(url).pathname;
     const base = pathname.split("/").pop() || "file";

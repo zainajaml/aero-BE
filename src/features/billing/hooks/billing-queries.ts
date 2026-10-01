@@ -12,7 +12,7 @@ import {
 
 export type BillingParams = Record<string, string>;
 
-export const billingKeys = {
+const billingKeys = {
   all: ["billing"] as const,
   options: () => [...billingKeys.all, "options"] as const,
   report: (params: BillingParams) => [...billingKeys.all, "report", params] as const,

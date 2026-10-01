@@ -16,12 +16,6 @@ export function useCanWrite(projectId?: string | null): boolean {
   return !hasAnyRole(["viewer"]) && !archived;
 }
 
-/** Convenience inverse of {@link useCanWrite}. */
-export function useIsViewer(): boolean {
-  const { hasAnyRole } = useAuth();
-  return hasAnyRole(["viewer"]);
-}
-
 /** True when the given (or active) project is archived. */
 export function useProjectArchived(projectId?: string | null): boolean {
   const ctx = useOptionalProjects();

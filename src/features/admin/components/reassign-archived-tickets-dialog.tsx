@@ -20,7 +20,7 @@ import { TicketCode } from "./ticket-code";
 const UNASSIGN = "__unassign__";
 
 /** `reassign` set = hand the open tickets over in the same archive call; omitted = leave them. */
-export type ArchiveCompletion = (reassign?: { assigneeId: string | null }) => Promise<void>;
+type ArchiveCompletion = (reassign?: { assigneeId: string | null }) => Promise<void>;
 
 interface Props {
   userId: string;

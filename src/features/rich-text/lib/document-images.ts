@@ -1,10 +1,10 @@
 import { signedUrl } from "@/shared/api/signed-urls";
 import { uploadInlineImage } from "../api/rich-text.api";
 
-export const DOCUMENT_IMAGE_BUCKET = "document-images";
+const DOCUMENT_IMAGE_BUCKET = "document-images";
 // Sentinel prefix used to persist a stable storage path (never a signed URL)
 // inside the document JSON. Signed URLs are short-lived and must not be stored.
-export const STORAGE_PREFIX = "doc-image://";
+const STORAGE_PREFIX = "doc-image://";
 
 /**
  * Extract the storage object path from any known image src form:
@@ -13,7 +13,7 @@ export const STORAGE_PREFIX = "doc-image://";
  * - legacy public URL: `.../storage/v1/object/public/document-images/<path>`
  * Returns null when the src is not a document-images reference.
  */
-export function extractDocumentImagePath(src: unknown): string | null {
+function extractDocumentImagePath(src: unknown): string | null {
   if (typeof src !== "string" || !src) return null;
   if (src.startsWith(STORAGE_PREFIX)) return src.slice(STORAGE_PREFIX.length);
   const markers = [

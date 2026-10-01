@@ -19,7 +19,7 @@ import { documentKeys } from "./document-queries";
 const MAX_FILE_BYTES = 50 * 1024 * 1024;
 
 /** Refresh every documents cache (project-scoped, all-projects mode and the "#" tagging list). */
-export function useRefreshDocuments() {
+function useRefreshDocuments() {
   const qc = useQueryClient();
   return () =>
     Promise.all([

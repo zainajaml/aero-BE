@@ -86,12 +86,3 @@ export function StackField({ label, children }: { label: string; children: React
     </div>
   );
 }
-
-/** Read-only value display used when a card is not in edit mode. */
-export function ReadValue({ value }: { value?: string | null }) {
-  return (
-    <p className="truncate text-sm">
-      {value?.trim() ? value : <span className="text-muted-foreground/60">Not set</span>}
-    </p>
-  );
-}

@@ -7,8 +7,6 @@ export type OrgInvitation = OrgUserList["invitations"][number];
 export type OrgProject = OrgUserList["projects"][number];
 export type OrgAccount = OrgUserList["accounts"][number];
 export type UpdateUserAccessRequest = components["schemas"]["UpdateUserAccessRequest"];
-export type RemoveUserAccessResult = components["schemas"]["RemoveUserAccessResult"];
-export type UserOpenTickets = components["schemas"]["UserOpenTickets"];
 export type ArchiveUserRequest = components["schemas"]["ArchiveUserRequest"];
 
 /** User management listing, clipped server-side to the account/project open in the UI. */
@@ -37,14 +35,6 @@ export const removeUserAccess = (userId: string, projectId?: string | null) =>
 
 export const listUserOpenTickets = (userId: string) =>
   unwrap(api.GET("/api/v1/admin/users/{userId}/open-tickets", { params: { path: { userId } } }));
-
-export const reassignUserTickets = (userId: string, assigneeId: string | null) =>
-  unwrap(
-    api.POST("/api/v1/admin/users/{userId}/reassign-tickets", {
-      params: { path: { userId } },
-      body: { assigneeId },
-    }),
-  );
 
 /** Archives an identity (super admins), optionally reassigning its open tickets in the same call. */
 export const archiveUser = (userId: string, body: ArchiveUserRequest = {}) =>

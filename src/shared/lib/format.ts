@@ -1,4 +1,4 @@
-export function minutesToDHM(total: number): { d: number; h: number; m: number } {
+function minutesToDHM(total: number): { d: number; h: number; m: number } {
   const safe = Math.max(0, Math.floor(total));
   const d = Math.floor(safe / (60 * 8)); // 8h workday
   const remAfterDays = safe - d * 60 * 8;
@@ -45,28 +45,6 @@ export const RESOURCE_TYPES = [
   "Solution Architect",
   "Other",
 ] as const;
-
-export const STATUS_TONE: Record<
-  string,
-  "cyan" | "magenta" | "lime" | "amber" | "rose" | "violet" | "muted"
-> = {
-  backlog: "muted",
-  todo: "cyan",
-  in_progress: "violet",
-  in_review: "amber",
-  done: "lime",
-  blocked: "rose",
-};
-
-export const PRIORITY_TONE: Record<
-  string,
-  "cyan" | "magenta" | "lime" | "amber" | "rose" | "violet" | "muted"
-> = {
-  low: "muted",
-  medium: "cyan",
-  high: "amber",
-  urgent: "rose",
-};
 
 export const TYPE_TONE: Record<
   string,

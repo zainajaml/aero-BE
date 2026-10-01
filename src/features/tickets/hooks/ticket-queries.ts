@@ -8,7 +8,6 @@ import {
   listEstimates,
   listProjectEstimates,
   listProjectTickets,
-  listStageHistory,
   listWorkLogs,
 } from "../api/tickets.api";
 import {
@@ -156,14 +155,6 @@ export function useProjectEstimates(projectId: string | null | undefined) {
     queryKey: ticketKeys.projectEstimates(projectId),
     enabled: !!projectId,
     queryFn: () => listProjectEstimates(projectId!),
-  });
-}
-
-export function useStageHistory(projectId: string | null | undefined) {
-  return useQuery({
-    queryKey: ticketKeys.stageHistory(projectId),
-    enabled: !!projectId,
-    queryFn: () => listStageHistory(projectId!),
   });
 }
 

@@ -1,7 +1,7 @@
 import { api, unwrap } from "@/shared/api/client";
 import type { components, operations } from "@/shared/api/schema.gen";
 
-export type AuditLogPage = components["schemas"]["AuditLogPage"];
+type AuditLogPage = components["schemas"]["AuditLogPage"];
 export type AuditLogRow = AuditLogPage["items"][number];
 export type AuditLogQuery = NonNullable<operations["listAuditLogs"]["parameters"]["query"]>;
 export type AuditSort = NonNullable<AuditLogQuery["sort"]>;

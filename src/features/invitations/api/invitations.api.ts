@@ -1,9 +1,6 @@
 import { api, unwrap } from "@/shared/api/client";
 import type { components } from "@/shared/api/schema.gen";
-
-export type InvitationLookup = components["schemas"]["InvitationLookupResult"];
 export type CreateInvitationRequest = components["schemas"]["CreateInvitationRequest"];
-export type CreateInvitationResult = components["schemas"]["CreateInvitationResult"];
 
 export const lookupInvitation = (token: string) =>
   unwrap(api.POST("/api/v1/invitations/lookup", { body: { token } }));

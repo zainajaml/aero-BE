@@ -2,7 +2,6 @@ import { api, unwrap } from "@/shared/api/client";
 import type { components } from "@/shared/api/schema.gen";
 
 export type AdministeredAccount = components["schemas"]["AdministeredAccount"];
-export type Person = components["schemas"]["Person"];
 
 export const listAdministeredAccounts = () => unwrap(api.GET("/api/v1/accounts/administered"));
 export const createAccount = (body: components["schemas"]["CreateAccountRequest"]) =>

@@ -16,7 +16,7 @@ import type { SupportIssue } from "../api/support.api";
 import { useDeleteSupportIssue, useToggleSupportIssueStatus } from "../hooks/use-support-mutations";
 import { fmtTime, shortDayFmt } from "../lib/support-format";
 
-export function SupportStatusBadge({
+function SupportStatusBadge({
   status,
   size = "sm",
 }: {

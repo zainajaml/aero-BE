@@ -8,7 +8,7 @@ import { createAccount, deleteAccount, updateAccount } from "../api/accounts.api
 import { accountKeys } from "./account-queries";
 
 /** Accounts, projects and the caller's admin scope can all change with an account write. */
-export function invalidateAccountScope(queryClient: QueryClient, { auth = false } = {}) {
+function invalidateAccountScope(queryClient: QueryClient, { auth = false } = {}) {
   void queryClient.invalidateQueries({ queryKey: accountKeys.all });
   void queryClient.invalidateQueries({ queryKey: projectKeys.all });
   if (auth) void queryClient.invalidateQueries({ queryKey: authKeys.all });

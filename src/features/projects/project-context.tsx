@@ -13,9 +13,9 @@ import { listAccounts, listProjects, type Account, type Project } from "./api/pr
 import { projectKeys } from "./hooks/project-queries";
 
 export type { Project, ProjectType } from "./api/projects.api";
-export type AccountLite = Pick<Account, "id" | "name">;
+type AccountLite = Pick<Account, "id" | "name">;
 
-export const ALL_PROJECTS = "all";
+const ALL_PROJECTS = "all";
 
 interface ProjectContextValue {
   /** Active (non-archived) projects the user can open. Used by every picker. */

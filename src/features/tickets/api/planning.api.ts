@@ -4,13 +4,11 @@ import type { components } from "@/shared/api/schema.gen";
 type Schemas = components["schemas"];
 
 export type Sprint = Schemas["Sprint"];
-export type SprintStatus = Sprint["status"];
 export type CreateSprintRequest = Schemas["CreateSprintRequest"];
 export type UpdateSprintRequest = Schemas["UpdateSprintRequest"];
 export type BoardColumn = Schemas["BoardColumn"];
 export type Epic = Schemas["Epic"];
 export type Person = Schemas["Person"];
-export type ProjectPerson = Schemas["ProjectPerson"];
 export type Rate = Schemas["Rate"];
 
 const projectPath = (projectId: string) => ({ params: { path: { projectId } } });

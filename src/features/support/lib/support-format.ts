@@ -6,7 +6,7 @@ export function isVideoPath(path: string) {
   return VIDEO_EXTS.includes(ext);
 }
 
-export const AVATAR_STYLES = [
+const AVATAR_STYLES = [
   "bg-neon-amber/20 text-neon-amber",
   "bg-neon-lime/20 text-neon-lime",
   "bg-neon-violet/20 text-neon-violet",

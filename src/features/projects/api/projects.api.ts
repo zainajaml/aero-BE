@@ -5,8 +5,6 @@ export type Project = components["schemas"]["Project"];
 export type ProjectType = components["schemas"]["ProjectType"];
 export type Account = components["schemas"]["Account"];
 export type ProjectStats = components["schemas"]["ProjectStats"];
-export type ProjectPerson = components["schemas"]["ProjectPerson"];
-export type Rate = components["schemas"]["Rate"];
 
 export const listProjects = () => unwrap(api.GET("/api/v1/projects"));
 export const listAccounts = () => unwrap(api.GET("/api/v1/accounts"));
@@ -32,8 +30,6 @@ export const moveProject = (projectId: string, accountId: string) =>
   );
 export const getProjectStats = (ids: string[]) =>
   unwrap(api.GET("/api/v1/projects/stats", { params: { query: { ids: ids.join(",") } } }));
-export const listProjectPeople = (projectId: string) =>
-  unwrap(api.GET("/api/v1/projects/{projectId}/people", { params: { path: { projectId } } }));
 export const listRateCard = (ids: string[]) =>
   unwrap(api.GET("/api/v1/rate-card", { params: { query: { ids: ids.join(",") } } }));
 export const createRate = (projectId: string, body: components["schemas"]["RateRequest"]) =>

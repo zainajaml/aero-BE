@@ -11,7 +11,7 @@ function collectText(node: DocNode, out: string[]): void {
 }
 
 /** Plain text of a comment body: serialized TipTap JSON or legacy text/HTML. */
-export function commentPlainText(body: string | null | undefined): string {
+function commentPlainText(body: string | null | undefined): string {
   if (!body) return "";
   let text = body;
   if (body.trimStart().startsWith("{")) {

@@ -1,5 +1,5 @@
 /** Human-facing labels for app roles. `admin` is a per-project admin. */
-export const ROLE_LABELS: Record<string, string> = {
+const ROLE_LABELS: Record<string, string> = {
   super_admin: "Super Admin",
   account_admin: "Account Admin",
   admin: "Project Admin",

@@ -9,7 +9,6 @@ export type CreateTicketRequest = Schemas["CreateTicketRequest"];
 export type UpdateTicketRequest = Schemas["UpdateTicketRequest"];
 export type MoveTicketRequest = Schemas["MoveTicketRequest"];
 export type BulkUpdateTicketsRequest = Schemas["BulkUpdateTicketsRequest"];
-export type BulkDeleteTicketsResult = Schemas["BulkDeleteTicketsResult"];
 export type Estimate = Schemas["Estimate"];
 export type AddEstimateRequest = Schemas["AddEstimateRequest"];
 export type UpdateEstimateRequest = Schemas["UpdateEstimateRequest"];

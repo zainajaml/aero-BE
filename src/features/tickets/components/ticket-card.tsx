@@ -18,7 +18,7 @@ export interface TicketAssignee {
   archivedAt?: string | null;
 }
 
-export interface TicketLike {
+interface TicketLike {
   id: string;
   code: string;
   title: string;
