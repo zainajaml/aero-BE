@@ -18,6 +18,7 @@ import { useAuth, type AppRole } from "@/features/auth/auth-context";
 import { GlassPanel } from "@/shared/ui/glass/glass-panel";
 
 import { SidebarProfileMenu } from "@/features/users/components/sidebar-profile-menu";
+import { NotificationsNavItem } from "@/features/notifications/components/notifications-nav-item";
 
 import { ProjectSwitcher } from "@/features/projects/components/project-switcher";
 import { AccountSwitcher } from "@/features/projects/components/account-switcher";
@@ -215,6 +216,7 @@ export function AppShell({ children }: { children: ReactNode }) {
               hasProject={hasProject}
             />
             <div className="flex flex-col gap-0.5">
+              <NotificationsNavItem />
               <SettingsLink />
               <SidebarProfileMenu />
             </div>
@@ -256,6 +258,7 @@ export function AppShell({ children }: { children: ReactNode }) {
                       onNavigate={() => setMobileOpen(false)}
                     />
                     <div className="flex flex-col gap-0.5">
+                      <NotificationsNavItem onNavigate={() => setMobileOpen(false)} />
                       <SettingsLink onNavigate={() => setMobileOpen(false)} />
                       <SidebarProfileMenu onNavigate={() => setMobileOpen(false)} />
                     </div>

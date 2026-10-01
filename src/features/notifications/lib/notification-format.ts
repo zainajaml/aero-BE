@@ -2,7 +2,8 @@ import type { NotificationRow } from "../api/notifications.api";
 
 export const PAGE_SIZES = [50, 100, 200] as const;
 
-export type SortKey = "createdAt" | "type" | "ticket" | "title" | "createdBy" | "details" | "status";
+export type SortKey =
+  "createdAt" | "type" | "ticket" | "title" | "createdBy" | "details" | "status";
 export type SortDir = "asc" | "desc";
 
 /** Human-readable label from a template name, e.g. "comment-mention" → "Comment Mention". */
@@ -68,8 +69,7 @@ export function sortRows(rows: NotificationRow[], key: SortKey, dirName: SortDir
       return humanizeTemplate(a.templateName).localeCompare(humanizeTemplate(b.templateName)) * dir;
     if (key === "ticket") return (a.ticketCode ?? "").localeCompare(b.ticketCode ?? "") * dir;
     if (key === "title") return (a.ticketTitle ?? "").localeCompare(b.ticketTitle ?? "") * dir;
-    if (key === "details")
-      return (detailsText(a) ?? "").localeCompare(detailsText(b) ?? "") * dir;
+    if (key === "details") return (detailsText(a) ?? "").localeCompare(detailsText(b) ?? "") * dir;
     if (key === "status") return (statusRank(a.status) - statusRank(b.status)) * dir;
     return (a.author ?? "").localeCompare(b.author ?? "") * dir;
   });

@@ -4,8 +4,7 @@ import { useTimezone } from "@/features/users/lib/timezone";
 export function useNotificationDate() {
   const tz = useTimezone();
   return (d: string) =>
-    `${tz.formatDateTime(d, { hour: "numeric", minute: "2-digit" }).replace(
-      /, (?=\d{1,2}:\d{2})/,
-      " ",
-    )} ${tz.tz}`;
+    `${tz
+      .formatDateTime(d, { hour: "numeric", minute: "2-digit" })
+      .replace(/, (?=\d{1,2}:\d{2})/, " ")} ${tz.tz}`;
 }
