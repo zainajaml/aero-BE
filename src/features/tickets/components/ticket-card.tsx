@@ -10,7 +10,6 @@ import { displayName } from "@/features/users/lib/names";
 import { ComplexityBars } from "./complexity-bars";
 import { TicketCode } from "./ticket-code";
 
-
 export interface TicketAssignee {
   fullName: string | null;
   firstName?: string | null;
@@ -53,7 +52,6 @@ const TYPE_ICON_COLOR: Record<string, string> = {
   task: "text-neon-cyan",
 };
 
-
 export function TicketCard({ ticket, onClick, dragging, compact, className, dragHandle }: Props) {
   const baseName = ticket.assignee ? displayName(ticket.assignee, "") || null : null;
   const isArchived = !!ticket.assignee?.archivedAt;
@@ -80,7 +78,13 @@ export function TicketCard({ ticket, onClick, dragging, compact, className, drag
           <ComplexityBars priority={ticket.priority} />
           <span className="sr-only">{ticket.priority}</span>
           {TypeIcon && (
-            <TypeIcon className={cn("h-4 w-4 shrink-0", TYPE_ICON_COLOR[ticket.type] ?? "text-muted-foreground")} aria-label={ticket.type} />
+            <TypeIcon
+              className={cn(
+                "h-4 w-4 shrink-0",
+                TYPE_ICON_COLOR[ticket.type] ?? "text-muted-foreground",
+              )}
+              aria-label={ticket.type}
+            />
           )}
         </div>
       </div>
@@ -93,7 +97,13 @@ export function TicketCard({ ticket, onClick, dragging, compact, className, drag
             <UserAvatar
               path={ticket.assignee?.avatarUrl}
               name={assigneeName}
-              title={assigneeName ? (isArchived ? `${assigneeName} (Archived)` : assigneeName) : "Assigned"}
+              title={
+                assigneeName
+                  ? isArchived
+                    ? `${assigneeName} (Archived)`
+                    : assigneeName
+                  : "Assigned"
+              }
             />
             {assigneeName && (
               <span className="flex min-w-0 items-center gap-1.5 truncate text-[10px] text-muted-foreground">
@@ -115,7 +125,13 @@ export function TicketCard({ ticket, onClick, dragging, compact, className, drag
             <span className="text-muted-foreground/70">est</span>{" "}
             {formatDHM(ticket.estimateMinutes)}
             {" / "}
-            <span className={cn((ticket.loggedMinutes ?? 0) > ticket.estimateMinutes && ticket.estimateMinutes > 0 && "text-destructive")}>
+            <span
+              className={cn(
+                (ticket.loggedMinutes ?? 0) > ticket.estimateMinutes &&
+                  ticket.estimateMinutes > 0 &&
+                  "text-destructive",
+              )}
+            >
               {formatDHM(ticket.loggedMinutes ?? 0)}
             </span>{" "}
             <span className="text-muted-foreground/70">logged</span>

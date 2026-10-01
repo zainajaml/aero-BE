@@ -9,8 +9,8 @@ export function InvitableUsersSection({ team }: { team: JiraTeamStep }) {
     <div className="space-y-3">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <p className="text-sm font-medium">
-          {invitableUsers.length} new {invitableUsers.length === 1 ? "person" : "people"} from
-          Jira <Badge variant="secondary">Team</Badge>
+          {invitableUsers.length} new {invitableUsers.length === 1 ? "person" : "people"} from Jira{" "}
+          <Badge variant="secondary">Team</Badge>
         </p>
         {!invited && (
           <div className="flex gap-2 text-xs">

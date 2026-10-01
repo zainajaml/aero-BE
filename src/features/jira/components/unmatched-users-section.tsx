@@ -1,12 +1,6 @@
 import { Loader2 } from "lucide-react";
 import { Button } from "@/shared/ui/button";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/shared/ui/select";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/shared/ui/select";
 import type { JiraTeamStep } from "../hooks/use-jira-team-step";
 
 /** Jira people without an email: match them to SpaceScope users to keep their assignments. */

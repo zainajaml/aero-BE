@@ -80,7 +80,14 @@ function TicketContextSync({ ticketId }: { ticketId: string }) {
       return;
     }
     if (activeProjectId !== project.id) setActiveProjectId(project.id);
-  }, [projectId, projects, accountFilterId, activeProjectId, setAccountFilterId, setActiveProjectId]);
+  }, [
+    projectId,
+    projects,
+    accountFilterId,
+    activeProjectId,
+    setAccountFilterId,
+    setActiveProjectId,
+  ]);
 
   return null;
 }

@@ -1,7 +1,12 @@
 import { useState } from "react";
 import { Popover, PopoverContent, PopoverTrigger } from "@/shared/ui/popover";
 import {
-  Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList,
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
 } from "@/shared/ui/command";
 import { X, Check } from "lucide-react";
 import { EpicIcon } from "@/shared/ui/icons/epic-icon";
@@ -56,10 +61,15 @@ export function EpicTagInput({ projectId, selected, onChange, disabled }: Props)
     );
   }
 
-
   return (
     <div>
-      <Popover open={open} onOpenChange={(o) => { setOpen(o); if (!o) setQuery(""); }}>
+      <Popover
+        open={open}
+        onOpenChange={(o) => {
+          setOpen(o);
+          if (!o) setQuery("");
+        }}
+      >
         <PopoverTrigger asChild>
           <button
             type="button"
@@ -92,55 +102,57 @@ export function EpicTagInput({ projectId, selected, onChange, disabled }: Props)
               </span>
             ))}
             <span className="flex items-center gap-1.5 text-[var(--tk-muted)]">
-              <EpicIcon className="h-3.5 w-3.5 opacity-40" />Add epic…
+              <EpicIcon className="h-3.5 w-3.5 opacity-40" />
+              Add epic…
             </span>
           </button>
         </PopoverTrigger>
 
-          <PopoverContent
-            className="z-[60] w-44 max-w-[calc(100vw-2rem)] border-[var(--tk-border)] bg-[var(--tk-surface)] p-0 text-[var(--tk-text)]"
-            align="end"
-            side="bottom"
-            sideOffset={4}
-            avoidCollisions
-            collisionPadding={16}
+        <PopoverContent
+          className="z-[60] w-44 max-w-[calc(100vw-2rem)] border-[var(--tk-border)] bg-[var(--tk-surface)] p-0 text-[var(--tk-text)]"
+          align="end"
+          side="bottom"
+          sideOffset={4}
+          avoidCollisions
+          collisionPadding={16}
+        >
+          <Command
+            shouldFilter
+            className="rounded-md bg-transparent text-[var(--tk-text)] [&_[cmdk-input-wrapper]]:border-0 [&_[cmdk-input-wrapper]]:border-b [&_[cmdk-input-wrapper]]:border-[var(--tk-border)]"
           >
-            <Command shouldFilter className="rounded-md bg-transparent text-[var(--tk-text)] [&_[cmdk-input-wrapper]]:border-0 [&_[cmdk-input-wrapper]]:border-b [&_[cmdk-input-wrapper]]:border-[var(--tk-border)]">
-              <CommandInput
-                placeholder="Search epics…"
-                value={query}
-                onValueChange={setQuery}
-                className="h-9 border-0 bg-transparent px-0 text-sm shadow-none outline-none ring-0 focus:ring-0 focus-visible:ring-0"
-              />
-              <CommandList className="max-h-56 p-1">
-                {epics.length > 0 && (
-                  <CommandGroup className="p-0 [&_[cmdk-group-heading]]:hidden">
-                    {epics.map((e) => (
-                      <CommandItem
-                        key={e.id}
-                        value={e.name}
-                        onSelect={() => toggle(e)}
-                        className="rounded-md border-0 bg-transparent text-[var(--tk-body)] data-[selected=true]:bg-[var(--tk-divider)] data-[selected=true]:text-[var(--tk-text)]"
-                      >
-                        <Check
-                          className={cn(
-                            "h-4 w-4",
-                            selectedIds.has(e.id) ? "opacity-100" : "opacity-0",
-                          )}
-                        />
-                        {e.name}
-                      </CommandItem>
-                    ))}
-                  </CommandGroup>
-                )}
-                <CommandEmpty className="px-3 py-2 text-left text-sm text-[var(--tk-muted)]">
-                  {epics.length === 0 ? "No epics available." : "No matching epic."}
-                </CommandEmpty>
-              </CommandList>
-            </Command>
-
-          </PopoverContent>
-
+            <CommandInput
+              placeholder="Search epics…"
+              value={query}
+              onValueChange={setQuery}
+              className="h-9 border-0 bg-transparent px-0 text-sm shadow-none outline-none ring-0 focus:ring-0 focus-visible:ring-0"
+            />
+            <CommandList className="max-h-56 p-1">
+              {epics.length > 0 && (
+                <CommandGroup className="p-0 [&_[cmdk-group-heading]]:hidden">
+                  {epics.map((e) => (
+                    <CommandItem
+                      key={e.id}
+                      value={e.name}
+                      onSelect={() => toggle(e)}
+                      className="rounded-md border-0 bg-transparent text-[var(--tk-body)] data-[selected=true]:bg-[var(--tk-divider)] data-[selected=true]:text-[var(--tk-text)]"
+                    >
+                      <Check
+                        className={cn(
+                          "h-4 w-4",
+                          selectedIds.has(e.id) ? "opacity-100" : "opacity-0",
+                        )}
+                      />
+                      {e.name}
+                    </CommandItem>
+                  ))}
+                </CommandGroup>
+              )}
+              <CommandEmpty className="px-3 py-2 text-left text-sm text-[var(--tk-muted)]">
+                {epics.length === 0 ? "No epics available." : "No matching epic."}
+              </CommandEmpty>
+            </CommandList>
+          </Command>
+        </PopoverContent>
       </Popover>
     </div>
   );

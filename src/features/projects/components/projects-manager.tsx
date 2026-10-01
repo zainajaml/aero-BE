@@ -48,12 +48,7 @@ const COLUMNS: { key: Exclude<SortKey, null>; label: string; right?: boolean }[]
 ];
 
 export function ProjectsManager() {
-  const {
-    visibleProjects: projects,
-    accounts,
-    isLoading,
-    setActiveProjectId,
-  } = useProjects();
+  const { visibleProjects: projects, accounts, isLoading, setActiveProjectId } = useProjects();
   const { hasAnyRole } = useAuth();
   const canCreateProjects = hasAnyRole(["super_admin", "account_admin"]);
   const tz = useTimezone();
@@ -195,7 +190,9 @@ export function ProjectsManager() {
                 return (
                   <TableRow key={p.id}>
                     <TableCell className="text-sm">{accountById.get(p.accountId) ?? "—"}</TableCell>
-                    <TableCell className="font-mono text-xs text-muted-foreground">{p.key}</TableCell>
+                    <TableCell className="font-mono text-xs text-muted-foreground">
+                      {p.key}
+                    </TableCell>
                     <TableCell>
                       <button
                         onClick={() => setActiveProjectId(p.id)}

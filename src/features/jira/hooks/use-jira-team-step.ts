@@ -66,7 +66,9 @@ export function useJiraTeamStep(
     onSuccess: (res) => {
       setProgress(res.progress);
       setMappings({});
-      toast.success(res.assigned > 0 ? `${res.assigned} ticket(s) reassigned.` : "Assignments saved.");
+      toast.success(
+        res.assigned > 0 ? `${res.assigned} ticket(s) reassigned.` : "Assignments saved.",
+      );
     },
     onError: (e) =>
       toast.error(errorMessage(e, "We couldn't save those assignments. Please try again.")),

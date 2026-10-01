@@ -44,9 +44,7 @@ export const getJiraImport = (importId: string) =>
 export const stepJiraImport = (importId: string) =>
   unwrap(api.POST("/api/v1/jira/imports/{importId}/step", { params: { path: { importId } } }));
 export const listJiraImportCandidates = (importId: string) =>
-  unwrap(
-    api.GET("/api/v1/jira/imports/{importId}/candidates", { params: { path: { importId } } }),
-  );
+  unwrap(api.GET("/api/v1/jira/imports/{importId}/candidates", { params: { path: { importId } } }));
 export const assignJiraImportUsers = (importId: string, mappings: JiraAssignMapping[]) =>
   unwrap(
     api.POST("/api/v1/jira/imports/{importId}/assign-users", {

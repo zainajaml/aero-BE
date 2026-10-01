@@ -46,7 +46,9 @@ export const moveTicket = (ticketId: string, body: MoveTicketRequest) =>
 
 /** Replace the ticket's full epic set. */
 export const setTicketEpics = (ticketId: string, epicIds: string[]) =>
-  unwrap(api.PUT("/api/v1/tickets/{ticketId}/epics", { ...ticketPath(ticketId), body: { epicIds } }));
+  unwrap(
+    api.PUT("/api/v1/tickets/{ticketId}/epics", { ...ticketPath(ticketId), body: { epicIds } }),
+  );
 
 export async function deleteTicket(ticketId: string): Promise<void> {
   await api.DELETE("/api/v1/tickets/{ticketId}", ticketPath(ticketId));
@@ -62,7 +64,10 @@ export const bulkMoveTickets = (projectId: string, ticketIds: string[], sprintId
 
 export const bulkUpdateTickets = (projectId: string, body: BulkUpdateTicketsRequest) =>
   unwrap(
-    api.POST("/api/v1/projects/{projectId}/tickets/bulk-update", { ...projectPath(projectId), body }),
+    api.POST("/api/v1/projects/{projectId}/tickets/bulk-update", {
+      ...projectPath(projectId),
+      body,
+    }),
   );
 
 export const bulkDeleteTickets = (projectId: string, ticketIds: string[]) =>

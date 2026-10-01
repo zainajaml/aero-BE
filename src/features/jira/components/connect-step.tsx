@@ -21,8 +21,8 @@ export function ConnectStep({ notConfigured, pending, disabled, onConnect }: Pro
       </div>
       {notConfigured && (
         <p className="flex items-center gap-2 text-sm text-destructive">
-          <AlertTriangle className="h-4 w-4" /> Jira is not configured yet — add the Atlassian
-          app credentials first.
+          <AlertTriangle className="h-4 w-4" /> Jira is not configured yet — add the Atlassian app
+          credentials first.
         </p>
       )}
       <Button size="sm" className="rounded-full" onClick={onConnect} disabled={disabled}>

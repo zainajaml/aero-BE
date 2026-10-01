@@ -127,7 +127,11 @@ export function ManageEpicsDialog({ projectId, open, onOpenChange }: Props) {
                 disabled={!newName.trim() || createEpic.isPending}
                 className="rounded-full disabled:opacity-60"
               >
-                {createEpic.isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : <Plus className="h-4 w-4" />}
+                {createEpic.isPending ? (
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                ) : (
+                  <Plus className="h-4 w-4" />
+                )}
                 {createEpic.isPending ? "Adding…" : "Add"}
               </Button>
             </div>
@@ -136,109 +140,120 @@ export function ManageEpicsDialog({ projectId, open, onOpenChange }: Props) {
 
         <ScrollArea className="-mr-2 min-h-0 w-full flex-1 pr-2 [&>[data-radix-scroll-area-viewport]>div]:!block [&>[data-radix-scroll-area-viewport]>div]:w-full">
           <div className="w-full min-w-0 space-y-1">
-          {isLoading ? (
-            <p className="py-6 text-center text-sm text-muted-foreground">Loading…</p>
-          ) : epics.length === 0 ? (
-            <p className="py-6 text-center text-sm text-muted-foreground">No epics yet.</p>
-          ) : (
-            epics.map((epic) => (
-              <div
-                key={epic.id}
-                className="w-full min-w-0 overflow-hidden rounded-xl border border-input bg-background px-3 py-2 shadow-sm"
-              >
-                {!canWrite ? (
-                  <div className="flex items-center gap-3">
-                    <span title={epic.name} className="flex-1 truncate text-sm">{epic.name}</span>
-                  </div>
-                ) : editingId === epic.id ? (
-                  <div className="flex items-center gap-2">
-                    <div className="relative flex-1 min-w-0">
-                      <Input
-                        autoFocus
-                        value={editName}
-                        maxLength={80}
-                        onChange={(e) => setEditName(e.target.value)}
-                        onKeyDown={(e) => {
-                          if (e.key === "Enter" && editName.trim()) {
-                            if (editName.trim().length > 80) {
+            {isLoading ? (
+              <p className="py-6 text-center text-sm text-muted-foreground">Loading…</p>
+            ) : epics.length === 0 ? (
+              <p className="py-6 text-center text-sm text-muted-foreground">No epics yet.</p>
+            ) : (
+              epics.map((epic) => (
+                <div
+                  key={epic.id}
+                  className="w-full min-w-0 overflow-hidden rounded-xl border border-input bg-background px-3 py-2 shadow-sm"
+                >
+                  {!canWrite ? (
+                    <div className="flex items-center gap-3">
+                      <span title={epic.name} className="flex-1 truncate text-sm">
+                        {epic.name}
+                      </span>
+                    </div>
+                  ) : editingId === epic.id ? (
+                    <div className="flex items-center gap-2">
+                      <div className="relative flex-1 min-w-0">
+                        <Input
+                          autoFocus
+                          value={editName}
+                          maxLength={80}
+                          onChange={(e) => setEditName(e.target.value)}
+                          onKeyDown={(e) => {
+                            if (e.key === "Enter" && editName.trim()) {
+                              if (editName.trim().length > 80) {
+                                toast.error("Epic title must be 80 characters or less");
+                                return;
+                              }
+                              renameEpic.mutate({ id: epic.id, name: editName });
+                            }
+                            if (e.key === "Escape") setEditingId(null);
+                          }}
+                          className="h-8 pr-3"
+                        />
+                      </div>
+                      <div className="flex shrink-0 items-center gap-1">
+                        <Button
+                          size="icon"
+                          variant="ghost"
+                          className="h-8 w-8 shrink-0"
+                          disabled={!editName.trim() || renameEpic.isPending}
+                          onClick={() => {
+                            const trimmed = editName.trim();
+                            if (trimmed.length > 80) {
                               toast.error("Epic title must be 80 characters or less");
                               return;
                             }
                             renameEpic.mutate({ id: epic.id, name: editName });
+                          }}
+                          aria-label="Save"
+                        >
+                          {renameEpic.isPending ? (
+                            <Loader2 className="h-4 w-4 animate-spin" />
+                          ) : (
+                            <Check className="h-4 w-4" />
+                          )}
+                        </Button>
+                        <Button
+                          size="icon"
+                          variant="ghost"
+                          className="h-8 w-8 shrink-0"
+                          onClick={() => setEditingId(null)}
+                          aria-label="Cancel"
+                        >
+                          <X className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="flex w-full min-w-0 items-center gap-3">
+                      <span title={epic.name} className="min-w-0 flex-1 truncate text-sm">
+                        {epic.name}
+                      </span>
+                      <div className="flex w-[72px] shrink-0 items-center justify-end gap-1">
+                        <Button
+                          size="icon"
+                          variant="ghost"
+                          className="h-8 w-8 shrink-0"
+                          onClick={() => {
+                            setEditingId(epic.id);
+                            setEditName(epic.name);
+                          }}
+                          aria-label={`Edit ${epic.name}`}
+                        >
+                          <Pencil className="h-4 w-4" />
+                        </Button>
+                        <ConfirmDelete
+                          onConfirm={() => deleteEpic.mutate(epic.id)}
+                          title="Delete epic?"
+                          description={`This will remove "${epic.name}" and unassign it from all tickets.`}
+                          trigger={
+                            <Button
+                              size="icon"
+                              variant="ghost"
+                              className="h-8 w-8 shrink-0 text-muted-foreground"
+                              aria-label={`Delete ${epic.name}`}
+                              disabled={deleteEpic.isPending && deleteEpic.variables === epic.id}
+                            >
+                              {deleteEpic.isPending && deleteEpic.variables === epic.id ? (
+                                <Loader2 className="h-4 w-4 animate-spin" />
+                              ) : (
+                                <Trash2 className="h-4 w-4" />
+                              )}
+                            </Button>
                           }
-                          if (e.key === "Escape") setEditingId(null);
-                        }}
-                        className="h-8 pr-3"
-                      />
+                        />
+                      </div>
                     </div>
-                    <div className="flex shrink-0 items-center gap-1">
-                      <Button
-                        size="icon"
-                        variant="ghost"
-                        className="h-8 w-8 shrink-0"
-                        disabled={!editName.trim() || renameEpic.isPending}
-                        onClick={() => {
-                          const trimmed = editName.trim();
-                          if (trimmed.length > 80) {
-                            toast.error("Epic title must be 80 characters or less");
-                            return;
-                          }
-                          renameEpic.mutate({ id: epic.id, name: editName });
-                        }}
-                        aria-label="Save"
-                      >
-                        {renameEpic.isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : <Check className="h-4 w-4" />}
-                      </Button>
-                      <Button
-                        size="icon"
-                        variant="ghost"
-                        className="h-8 w-8 shrink-0"
-                        onClick={() => setEditingId(null)}
-                        aria-label="Cancel"
-                      >
-                        <X className="h-4 w-4" />
-                      </Button>
-                    </div>
-                  </div>
-                ) : (
-                  <div className="flex w-full min-w-0 items-center gap-3">
-                    <span title={epic.name} className="min-w-0 flex-1 truncate text-sm">{epic.name}</span>
-                    <div className="flex w-[72px] shrink-0 items-center justify-end gap-1">
-                      <Button
-                        size="icon"
-                        variant="ghost"
-                        className="h-8 w-8 shrink-0"
-                        onClick={() => {
-                          setEditingId(epic.id);
-                          setEditName(epic.name);
-                        }}
-                        aria-label={`Edit ${epic.name}`}
-                      >
-                        <Pencil className="h-4 w-4" />
-                      </Button>
-                      <ConfirmDelete
-                        onConfirm={() => deleteEpic.mutate(epic.id)}
-                        title="Delete epic?"
-                        description={`This will remove "${epic.name}" and unassign it from all tickets.`}
-                        trigger={
-                          <Button
-                            size="icon"
-                            variant="ghost"
-                            className="h-8 w-8 shrink-0 text-muted-foreground"
-                            aria-label={`Delete ${epic.name}`}
-                            disabled={deleteEpic.isPending && deleteEpic.variables === epic.id}
-                          >
-                            {deleteEpic.isPending && deleteEpic.variables === epic.id ? <Loader2 className="h-4 w-4 animate-spin" /> : <Trash2 className="h-4 w-4" />}
-
-                          </Button>
-                        }
-                      />
-                    </div>
-                  </div>
-                )}
-              </div>
-            ))
-          )}
+                  )}
+                </div>
+              ))
+            )}
           </div>
         </ScrollArea>
       </DialogContent>

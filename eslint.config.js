@@ -5,7 +5,17 @@ import reactRefresh from "eslint-plugin-react-refresh";
 import tseslint from "typescript-eslint";
 
 export default tseslint.config(
-  { ignores: ["dist", "coverage", "src/routeTree.gen.ts", "src/shared/api/schema.gen.ts"] },
+  {
+    ignores: [
+      "dist",
+      "coverage",
+      "test-results",
+      "playwright-report",
+      ".tanstack",
+      "src/routeTree.gen.ts",
+      "src/shared/api/schema.gen.ts",
+    ],
+  },
   js.configs.recommended,
   ...tseslint.configs.recommended,
   {
@@ -15,6 +25,12 @@ export default tseslint.config(
     rules: {
       ...reactHooks.configs.recommended.rules,
       "@typescript-eslint/no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
+    },
+  },
+  {
+    // App code reaches the backend only through the typed API layer; e2e helpers may use fetch.
+    files: ["src/**/*.{ts,tsx}"],
+    rules: {
       "no-restricted-globals": [
         "error",
         {
@@ -27,5 +43,10 @@ export default tseslint.config(
   {
     files: ["src/shared/api/**", "src/shared/ui/**"],
     rules: { "no-restricted-globals": "off", "react-refresh/only-export-components": "off" },
+  },
+  {
+    // Plain scripts served as-is (e.g. the pre-paint theme script).
+    files: ["public/**/*.js"],
+    languageOptions: { globals: globals.browser, sourceType: "script" },
   },
 );

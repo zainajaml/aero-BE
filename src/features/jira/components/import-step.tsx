@@ -1,12 +1,6 @@
 import { ArrowRight, CheckCircle2, Link2, Loader2, RefreshCw, Unlink } from "lucide-react";
 import { Button } from "@/shared/ui/button";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/shared/ui/select";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/shared/ui/select";
 import { cn } from "@/shared/lib/utils";
 import type { JiraImportProgress } from "../api/jira.api";
 import type { useJiraConnection } from "../hooks/use-jira-connection";

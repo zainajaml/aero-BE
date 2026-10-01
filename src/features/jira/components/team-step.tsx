@@ -24,8 +24,8 @@ export function TeamStep({ progress, team, onOpenProject }: Props) {
             {progress.projectName} imported
           </p>
           <p className="text-sm text-muted-foreground">
-            {progress.processed} issues, {progress.comments} comments, {progress.worklogs} work
-            logs and {progress.attachments} files are now in SpaceScope.
+            {progress.processed} issues, {progress.comments} comments, {progress.worklogs} work logs
+            and {progress.attachments} files are now in SpaceScope.
           </p>
         </div>
 

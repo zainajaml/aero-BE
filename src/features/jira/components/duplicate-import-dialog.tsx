@@ -25,8 +25,8 @@ export function DuplicateImportDialog({ duplicate, onClose, onChooseAnother, onR
         <DialogHeader>
           <DialogTitle>This Jira project has already been imported</DialogTitle>
           <DialogDescription>
-            <span className="font-medium text-foreground">{duplicate?.name}</span> already exists
-            in this SpaceScope account
+            <span className="font-medium text-foreground">{duplicate?.name}</span> already exists in
+            this SpaceScope account
             {duplicate?.tickets ? ` with ${duplicate.tickets} ticket(s)` : ""}. Would you like to
             refresh it with the latest data from Jira?
           </DialogDescription>

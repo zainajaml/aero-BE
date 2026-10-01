@@ -690,7 +690,6 @@ export function RichTextEditor({
     return () => {
       cancelled = true;
     };
-     
   }, [content, editor]);
 
   useEffect(() => {

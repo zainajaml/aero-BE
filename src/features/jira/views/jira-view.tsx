@@ -72,8 +72,8 @@ export function JiraView() {
       <div className="shrink-0">
         <h1 className="font-display text-2xl font-semibold tracking-tight">Jira Import</h1>
         <p className="text-sm text-muted-foreground">
-          Bring a Jira project into SpaceScope — issues, sprints, comments, work logs and files
-          are migrated automatically.
+          Bring a Jira project into SpaceScope — issues, sprints, comments, work logs and files are
+          migrated automatically.
         </p>
       </div>
 
