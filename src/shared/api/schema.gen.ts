@@ -2141,6 +2141,8 @@ export interface components {
             estimates?: {
                 resourceType: string;
                 minutes: number;
+                /** Format: date-time */
+                estimatedAt?: string;
             }[];
         };
         BulkMoveTicketsRequest: {
@@ -2149,6 +2151,7 @@ export interface components {
         };
         BulkUpdateTicketsRequest: {
             ticketIds: string[];
+            /** @default {} */
             set: {
                 columnId?: string | null;
                 assigneeId?: string | null;

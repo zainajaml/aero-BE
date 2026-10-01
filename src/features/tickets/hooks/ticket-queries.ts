@@ -134,10 +134,7 @@ export function useAssignablePeople(projectId: string | null | undefined) {
 
 /** Profile cards for arbitrary user ids, as a map by id. */
 export function usePeople(ids: Array<string | null | undefined>) {
-  const unique = useMemo(
-    () => [...new Set(ids.filter((id): id is string => !!id))].sort(),
-    [ids],
-  );
+  const unique = useMemo(() => [...new Set(ids.filter((id): id is string => !!id))].sort(), [ids]);
   const query = useQuery({
     queryKey: planningKeys.people(unique),
     enabled: unique.length > 0,

@@ -3,12 +3,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { format } from "date-fns";
 import { toast } from "sonner";
 import { displayName } from "@/features/users/lib/names";
-import {
-  bulkUpdateTickets,
-  setTicketEpics,
-  type BulkUpdateTicketsRequest,
-  type TicketSummary,
-} from "../../api/tickets.api";
+import { bulkUpdateTickets, type BulkUpdateTicketsRequest } from "../../api/tickets.api";
 import { invalidateProjectTickets, ticketKeys, useAssignablePeople } from "../ticket-queries";
 import { ticketErrorMessage } from "../../lib/ticket-errors";
 import type { EpicTag } from "../../components/epics/epic-tag-input";
@@ -103,23 +98,11 @@ export function useBulkEdit({
       if (dueMode === "set" && dueDate) set.dueDate = format(dueDate, "yyyy-MM-dd");
       const addEpicIds = epics.map((e) => e.id);
 
-      if (Object.keys(set).length > 0) {
-        await bulkUpdateTickets(projectId, {
-          ticketIds,
-          set,
-          ...(addEpicIds.length ? { addEpicIds } : {}),
-        });
-        return;
-      }
-      // Epics-only edit: bulk-update requires at least one `set` field, so add the
-      // epics per ticket on top of each ticket's current epic set.
-      const cached = qc.getQueryData<TicketSummary[]>(ticketKeys.project(projectId)) ?? [];
-      const current = new Map(cached.map((t) => [t.id, t.epicIds ?? []]));
-      await Promise.all(
-        ticketIds.map((id) =>
-          setTicketEpics(id, [...new Set([...(current.get(id) ?? []), ...addEpicIds])]),
-        ),
-      );
+      await bulkUpdateTickets(projectId, {
+        ticketIds,
+        set,
+        ...(addEpicIds.length ? { addEpicIds } : {}),
+      });
     },
     onSuccess: () => {
       toast.success(`Updated ${ticketIds.length} ticket${ticketIds.length === 1 ? "" : "s"}`);

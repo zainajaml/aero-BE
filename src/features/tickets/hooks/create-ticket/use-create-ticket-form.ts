@@ -131,7 +131,11 @@ export function useCreateTicketForm({
         dueDate: dueDate ? format(dueDate, "yyyy-MM-dd") : null,
         epicIds: epics.map((e) => e.id),
         estimates: estimates.estimates
-          .map((e) => ({ resourceType: e.resourceType, minutes: estimateRowMinutes(e) }))
+          .map((e) => ({
+            resourceType: e.resourceType,
+            minutes: estimateRowMinutes(e),
+            estimatedAt: e.estimatedAt,
+          }))
           .filter((e) => e.minutes > 0),
       });
 
