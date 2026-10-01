@@ -1,0 +1,6 @@
+dist
+coverage
+src/routeTree.gen.ts
+src/shared/api/schema.gen.ts
+openapi
+package-lock.json

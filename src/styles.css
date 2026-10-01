@@ -1,0 +1,612 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * AeroProject — "Grovia" inspired design system.
+ * Warm off-white canvas, near-black ink, a single soft-yellow accent.
+ * Clean white cards with soft shadows, big grotesque headings.
+ * All colors in oklch.
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+
+  --color-neon-cyan: var(--neon-cyan);
+  --color-neon-magenta: var(--neon-magenta);
+  --color-neon-lime: var(--neon-lime);
+  --color-neon-amber: var(--neon-amber);
+  --color-neon-orange: var(--neon-orange);
+  --color-neon-rose: var(--neon-rose);
+  --color-yellow: var(--yellow);
+  --color-neon-violet: var(--neon-violet);
+
+  --color-glass-bg: var(--glass-bg);
+  --color-glass-border: var(--glass-border);
+
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  --color-chart-estimate: var(--chart-estimate);
+  --color-chart-bar-1: var(--chart-bar-1);
+  --color-chart-bar-2: var(--chart-bar-2);
+  --color-chart-bar-3: var(--chart-bar-3);
+  --color-chart-bar-4: var(--chart-bar-4);
+  --color-chart-bar-5: var(--chart-bar-5);
+  --color-chart-bar-6: var(--chart-bar-6);
+
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  --font-sans:
+    "Inter", ui-sans-serif, system-ui, -apple-system, "SF Pro Text", "Segoe UI", sans-serif;
+  --font-display: "Space Grotesk", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+
+:root {
+  --radius: 1rem;
+
+  /* Light — warm off-white "paper" canvas */
+  --background: oklch(0.965 0.008 95);
+  --foreground: oklch(0.2 0.012 80);
+
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.2 0.012 80);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.2 0.012 80);
+
+  /* Primary = Grovia gold (same accent as the Save Ticket CTA, both themes) */
+  --primary: oklch(0.8 0.155 100);
+  --primary-foreground: oklch(0.2 0.02 90);
+  --secondary: oklch(0.93 0.01 95);
+  --secondary-foreground: oklch(0.24 0.012 80);
+  --muted: oklch(0.94 0.008 95);
+  --muted-foreground: oklch(0.5 0.01 85);
+  /* Accent = soft Grovia yellow */
+  --accent: oklch(0.92 0.14 100);
+  --accent-foreground: oklch(0.25 0.04 90);
+  --destructive: oklch(0.6 0.21 22);
+  --destructive-foreground: oklch(0.99 0 0);
+  --border: oklch(0.89 0.008 90);
+  --input: oklch(0.91 0.008 90);
+  --ring: oklch(0.78 0.13 100);
+
+  --glass-bg: oklch(1 0 0);
+  --glass-border: oklch(0.9 0.008 90);
+  --glass-blur: 0px;
+  --shadow-depth:
+    0 1px 2px 0 oklch(0.2 0.02 80 / 0.04), 0 18px 40px -22px oklch(0.2 0.02 80 / 0.22),
+    0 6px 14px -8px oklch(0.2 0.02 80 / 0.1);
+  --shadow-soft: 0 4px 16px -8px oklch(0.2 0.02 80 / 0.16);
+  --gradient-aurora:
+    radial-gradient(70% 60% at 85% 0%, oklch(0.95 0.13 100 / 0.55), transparent 60%),
+    radial-gradient(55% 50% at 0% 10%, oklch(0.95 0.05 95 / 0.4), transparent 60%);
+
+  /* Soft pastel status accents */
+  --neon-cyan: oklch(0.62 0.12 215);
+  --neon-magenta: oklch(0.6 0.18 350);
+  --neon-lime: oklch(0.58 0.14 150);
+  --neon-amber: oklch(0.62 0.14 75);
+  --neon-orange: oklch(0.64 0.16 50);
+  --neon-rose: oklch(0.6 0.18 20);
+  --neon-violet: oklch(0.55 0.16 285);
+  --yellow: oklch(0.62 0.16 100);
+
+  --chart-1: oklch(0.22 0.01 80);
+  --chart-2: oklch(0.82 0.16 100);
+  --chart-3: oklch(0.62 0.12 215);
+  --chart-4: oklch(0.62 0.14 75);
+  --chart-5: oklch(0.6 0.18 350);
+
+  /* Chart bars: darker values in light mode for contrast on the paper canvas */
+  --chart-estimate: oklch(0.55 0 0);
+  --chart-bar-1: oklch(0.52 0.12 215);
+  --chart-bar-2: oklch(0.48 0.16 285);
+  --chart-bar-3: oklch(0.52 0.14 150);
+  --chart-bar-4: oklch(0.55 0.14 75);
+  --chart-bar-5: oklch(0.5 0.18 20);
+  --chart-bar-6: oklch(0.5 0.18 350);
+
+  --sidebar: oklch(1 0 0);
+  --sidebar-foreground: oklch(0.24 0.012 80);
+  --sidebar-primary: oklch(0.8 0.155 100);
+  --sidebar-primary-foreground: oklch(0.2 0.02 90);
+  --sidebar-accent: oklch(0.94 0.008 95);
+  --sidebar-accent-foreground: oklch(0.24 0.012 80);
+  --sidebar-border: oklch(0.89 0.008 90);
+  --sidebar-ring: oklch(0.78 0.13 100);
+}
+
+.dark {
+  /* Dark — warm charcoal variant of Grovia */
+  --background: oklch(0.18 0.008 85);
+  --foreground: oklch(0.96 0.008 95);
+
+  --card: oklch(0.22 0.008 85);
+  --card-foreground: oklch(0.96 0.008 95);
+  --popover: oklch(0.21 0.008 85);
+  --popover-foreground: oklch(0.96 0.008 95);
+
+  --primary: oklch(0.92 0.14 100);
+  --primary-foreground: oklch(0.2 0.02 90);
+  --secondary: oklch(0.27 0.008 85);
+  --secondary-foreground: oklch(0.96 0.008 95);
+  --muted: oklch(0.26 0.008 85);
+  --muted-foreground: oklch(0.7 0.01 90);
+  --accent: oklch(0.3 0.04 95);
+  --accent-foreground: oklch(0.95 0.1 100);
+  --destructive: oklch(0.68 0.2 22);
+  --destructive-foreground: oklch(0.99 0 0);
+  --border: oklch(1 0 0 / 0.1);
+  --input: oklch(1 0 0 / 0.12);
+  --ring: oklch(0.85 0.13 100);
+
+  --glass-bg: oklch(0.22 0.008 85);
+  --glass-border: oklch(1 0 0 / 0.08);
+  --glass-blur: 0px;
+  --shadow-depth:
+    0 1px 2px 0 oklch(0 0 0 / 0.3), 0 24px 60px -28px oklch(0 0 0 / 0.6),
+    0 8px 18px -10px oklch(0 0 0 / 0.45);
+  --shadow-soft: 0 6px 18px -10px oklch(0 0 0 / 0.45);
+  --gradient-aurora:
+    radial-gradient(70% 60% at 85% 0%, oklch(0.5 0.14 100 / 0.32), transparent 60%),
+    radial-gradient(55% 50% at 0% 10%, oklch(0.4 0.04 95 / 0.3), transparent 60%);
+
+  --neon-cyan: oklch(0.78 0.13 215);
+  --neon-magenta: oklch(0.74 0.18 350);
+  --neon-lime: oklch(0.78 0.16 150);
+  --neon-amber: oklch(0.82 0.16 75);
+  --neon-orange: oklch(0.78 0.18 50);
+  --neon-rose: oklch(0.74 0.2 20);
+  --neon-violet: oklch(0.72 0.18 285);
+  --yellow: oklch(0.85 0.16 100);
+
+  --chart-1: oklch(0.92 0.14 100);
+  --chart-2: oklch(0.78 0.13 215);
+  --chart-3: oklch(0.78 0.16 150);
+  --chart-4: oklch(0.82 0.16 75);
+  --chart-5: oklch(0.74 0.18 350);
+
+  /* Chart bars: lighter values in dark mode for contrast on charcoal */
+  --chart-estimate: oklch(0.85 0 0);
+  --chart-bar-1: oklch(0.78 0.13 215);
+  --chart-bar-2: oklch(0.72 0.18 285);
+  --chart-bar-3: oklch(0.78 0.16 150);
+  --chart-bar-4: oklch(0.82 0.16 75);
+  --chart-bar-5: oklch(0.74 0.2 20);
+  --chart-bar-6: oklch(0.74 0.18 350);
+
+  --sidebar: oklch(0.21 0.008 85);
+  --sidebar-foreground: oklch(0.96 0.008 95);
+  --sidebar-primary: oklch(0.92 0.14 100);
+  --sidebar-primary-foreground: oklch(0.2 0.02 90);
+  --sidebar-accent: oklch(0.27 0.008 85);
+  --sidebar-accent-foreground: oklch(0.96 0.008 95);
+  --sidebar-border: oklch(1 0 0 / 0.08);
+  --sidebar-ring: oklch(0.85 0.13 100);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html,
+  body {
+    height: 100%;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  .font-display {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+
+  .aurora-bg {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background: var(--gradient-aurora);
+    z-index: 0;
+  }
+
+  /* Grovia surfaces: clean cards, no blur */
+  .glass {
+    background-color: var(--color-glass-bg);
+    border: 1px solid var(--color-glass-border);
+    box-shadow: var(--shadow-depth);
+  }
+
+  .glass-soft {
+    background-color: var(--color-glass-bg);
+    border: 1px solid var(--color-glass-border);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .neon-glow-cyan {
+    box-shadow: var(--shadow-soft);
+  }
+  .neon-glow-magenta {
+    box-shadow: var(--shadow-soft);
+  }
+  .neon-glow-lime {
+    box-shadow: var(--shadow-soft);
+  }
+  .neon-glow-amber {
+    box-shadow: var(--shadow-soft);
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* TipTap document editor content */
+.tiptap {
+  line-height: 1.7;
+  color: var(--foreground);
+}
+.tiptap:focus {
+  outline: none;
+}
+.tiptap > * + * {
+  margin-top: 0.75em;
+}
+.tiptap h1 {
+  font-size: 1.875rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-top: 1.2em;
+}
+.tiptap h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.25;
+  margin-top: 1.1em;
+}
+.tiptap h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.3;
+  margin-top: 1em;
+}
+.tiptap ul {
+  list-style: disc;
+  padding-left: 1.5rem;
+}
+.tiptap ol {
+  list-style: decimal;
+  padding-left: 1.5rem;
+}
+.tiptap li {
+  margin: 0.25em 0;
+}
+.tiptap blockquote {
+  border-left: 3px solid var(--primary);
+  padding-left: 1rem;
+  color: var(--muted-foreground);
+  font-style: italic;
+}
+.tiptap code {
+  background: var(--muted);
+  border-radius: 0.3rem;
+  padding: 0.15em 0.35em;
+  font-size: 0.875em;
+}
+.tiptap pre {
+  background: var(--muted);
+  border-radius: 0.6rem;
+  padding: 0.9rem 1rem;
+  overflow-x: auto;
+}
+.tiptap pre code {
+  background: none;
+  padding: 0;
+}
+.tiptap hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 1.5em 0;
+}
+.tiptap a {
+  color: inherit;
+  text-decoration: underline;
+}
+.tiptap p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  float: left;
+  color: var(--muted-foreground);
+  pointer-events: none;
+  height: 0;
+}
+.tiptap img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+  margin: 0.5em 0;
+}
+/* An image that cannot be resolved is hidden instead of rendering as a
+   tiny dot or an empty box. */
+.tiptap img[data-unresolved="true"] {
+  display: none;
+}
+
+.tiptap img.ProseMirror-selectednode {
+  outline: 2px solid var(--primary);
+}
+.tiptap div[data-youtube-video] {
+  margin: 0.75em 0;
+  max-width: 640px;
+}
+.tiptap div[data-youtube-video] iframe {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  height: auto;
+  border-radius: 0.5rem;
+  border: 1px solid var(--border);
+}
+.tiptap div[data-youtube-video].ProseMirror-selectednode iframe {
+  outline: 2px solid var(--primary);
+}
+.tiptap table {
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 1em 0;
+  width: auto;
+  table-layout: auto;
+  overflow: hidden;
+}
+.tiptap table td,
+.tiptap table th {
+  border: 1px solid #ffffff;
+  background: #eeeeee;
+  padding: 0.5rem 0.625rem;
+  vertical-align: top;
+  position: relative;
+  min-width: 3rem;
+}
+.tiptap table th {
+  background: #cccccc;
+  font-weight: 600;
+  text-align: left;
+}
+.tiptap table tr:first-child > *:first-child {
+  border-radius: 12px 0 0 0;
+}
+.tiptap table tr:first-child > *:last-child {
+  border-radius: 0 12px 0 0;
+}
+.tiptap table tr:last-child > *:first-child {
+  border-radius: 0 0 0 12px;
+}
+.tiptap table tr:last-child > *:last-child {
+  border-radius: 0 0 12px 0;
+}
+.dark .tiptap {
+  color: #ffffff;
+}
+.dark .tiptap table td,
+.dark .tiptap table th {
+  border-color: #1c1a17;
+  background: #333333;
+}
+.dark .tiptap table th {
+  background: #222222;
+}
+.tiptap table .selectedCell::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: color-mix(in oklab, var(--primary) 18%, transparent);
+  pointer-events: none;
+}
+.tiptap table .column-resize-handle {
+  position: absolute;
+  right: -2px;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--primary);
+  cursor: col-resize;
+}
+.tiptap .tableWrapper {
+  overflow-x: auto;
+}
+/* Task list */
+.tiptap ul[data-type="taskList"] {
+  list-style: none;
+  padding-left: 0;
+}
+.tiptap ul[data-type="taskList"] li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin: 0.35em 0;
+}
+.tiptap ul[data-type="taskList"] li > label {
+  flex-shrink: 0;
+  margin-top: 0.15em;
+  user-select: none;
+  cursor: pointer;
+}
+.tiptap ul[data-type="taskList"] li > label input[type="checkbox"] {
+  accent-color: var(--primary);
+  width: 1.1em;
+  height: 1.1em;
+  cursor: pointer;
+}
+.tiptap ul[data-type="taskList"] li > div {
+  flex: 1;
+  min-width: 0;
+}
+.tiptap ul[data-type="taskList"] li[data-checked="true"] > div {
+  text-decoration: line-through;
+  color: var(--muted-foreground);
+}
+.tiptap ul[data-type="taskList"] ul[data-type="taskList"] {
+  margin-top: 0.5em;
+  padding-left: 1.5rem;
+}
+
+/* Input-area editors (description/comments): force 1.2 line-height */
+.editor-input .ProseMirror,
+.editor-input .ProseMirror * {
+  line-height: 1.2 !important;
+}
+
+/* Description editor: 14px body text */
+.desc-editor .ProseMirror {
+  font-size: 14px;
+}
+
+/* ---------- Ticket detail modal design tokens ---------- */
+/* Defined globally so portalled dropdowns/popovers inherit them too. */
+:root,
+.ticket-modal {
+  /* Light theme (default) */
+  --tk-bg: #ffffff;
+  --tk-surface: #f6f5f1;
+  --tk-sidebar: #faf9f6;
+  --tk-border: #e4e1d8;
+  --tk-divider: #ece9e1;
+  --tk-text: #1a1814;
+  --tk-body: #3a372f;
+  --tk-muted: #78736a;
+  --tk-faint: #a7a297;
+  --tk-accent: #d9b800;
+  --tk-accent-hover: #c4a600;
+  --tk-on-accent: #1a1814;
+}
+.ticket-modal {
+  color: var(--tk-body);
+}
+.dark,
+.dark .ticket-modal {
+  --tk-bg: #14130f;
+  --tk-surface: #191713;
+  --tk-sidebar: #12110d;
+  --tk-border: #2a2820;
+  --tk-divider: #201e19;
+  --tk-text: #edeae3;
+  --tk-body: #cfcbc0;
+  --tk-muted: #8f8a7e;
+  --tk-faint: #6e6a60;
+  --tk-accent: #f2d64b;
+  --tk-accent-hover: #f8e27e;
+  --tk-on-accent: #14130f;
+}
+/* Neutralise the shared editor chrome inside the modal so the redesigned
+   card frame owns the borders/background. */
+.ticket-modal .desc-tab .ProseMirror {
+  min-height: 260px;
+}
+.ticket-modal .tk-editor .ProseMirror,
+.ticket-modal .tk-editor .tiptap {
+  color: var(--tk-body);
+}
+.ticket-modal .tk-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+.ticket-modal .tk-scroll::-webkit-scrollbar-thumb {
+  background: var(--tk-border);
+  border-radius: 999px;
+}
+
+a,
+a[href],
+[role="link"],
+[role="button"],
+button,
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+input[type="file"],
+input[type="image"],
+label,
+summary,
+select,
+[onclick] {
+  cursor: pointer;
+}
+
+/* ---- Shared form typography system ---------------------------------- */
+/* Field labels: 13px / 600 / muted. Sit 6px above their control. */
+@utility field-label {
+  font-size: 13px;
+  line-height: 1.15;
+  font-weight: 600;
+  letter-spacing: 0;
+  color: var(--tk-muted, var(--muted-foreground));
+}
+/* Field values: 15px / 400 / primary text. */
+@utility field-value {
+  font-size: 15px;
+  line-height: 1.35;
+  font-weight: 400;
+  color: var(--tk-body, var(--foreground));
+}
+/* Placeholders + helper text: 15px / 400 / muted. */
+@utility field-help {
+  font-size: 15px;
+  line-height: 1.35;
+  font-weight: 400;
+  color: var(--tk-muted, var(--muted-foreground));
+}
+
+@keyframes loading-slide {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(300%);
+  }
+}

@@ -1,0 +1,12 @@
+# Space Scope
+
+> Space Scope is a premium multi-project management platform for agencies and product teams — sprint planning, kanban boards, time tracking, analytics, docs, sprint status reports, release notes and a full audit trail in one workspace.
+
+## Pages
+
+- [Home](/): Overview of Space Scope — plan, work, log and report from one premium surface for admins, PMs, developers and clients.
+- [How to use AI for sprint planning](/blog/ai-sprint-planning): Practical guide to automating backlog grooming, estimates and capacity planning with AI.
+
+## Optional
+
+- [Sign in](/login): Sign in with a Spaceman Consulting account.
