@@ -1,4 +1,4 @@
-# aero-zenith-flow-frontend
+# aero-frontend
 
 React 19 + Vite single-page app for Space Scope. It talks only to the `aero-zenith-flow-backend`
 API.
