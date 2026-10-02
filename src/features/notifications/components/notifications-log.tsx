@@ -20,8 +20,10 @@ const SEARCH_DEBOUNCE_MS = 300;
  */
 export function NotificationsLog() {
   const fmt = useNotificationDate();
-  const { activeProjectId, isAllProjects } = useProjects();
+  const { activeProjectId, isAllProjects, isLoading: projectsLoading } = useProjects();
   const projectId = isAllProjects ? undefined : (activeProjectId ?? undefined);
+  // Wait for the active project so the unfiltered log never flashes before the project filter.
+  const scopeReady = !projectsLoading && (isAllProjects || !!activeProjectId);
   const { hasAnyRole } = useAuth();
   const canRetry = hasAnyRole(["super_admin", "account_admin", "admin"]);
   const { retry, retryingId } = useRetryNotification();
@@ -46,13 +48,16 @@ export function NotificationsLog() {
     setPage(1);
   }, [search, pageSize, failedOnly, projectId]);
 
-  const { data, isLoading } = useNotificationLog({
-    projectId,
-    failed: failedOnly ? "true" : undefined,
-    q: search || undefined,
-    page,
-    pageSize,
-  });
+  const { data, isLoading } = useNotificationLog(
+    {
+      projectId,
+      failed: failedOnly ? "true" : undefined,
+      q: search || undefined,
+      page,
+      pageSize,
+    },
+    scopeReady,
+  );
 
   const total = data?.total ?? 0;
   const failedCount = data?.failedCount ?? 0;

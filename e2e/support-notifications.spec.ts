@@ -68,15 +68,10 @@ test("the notifications page lists sent emails, such as a ticket assignment", as
   await expect(row).toBeVisible();
 });
 
-// Backend bug: invitation emails store `project_ids` (array) in their log metadata, while
-// GET /api/v1/notifications?projectId=… filters on `project_id`, so a project's invitations never
-// appear in its notification log (the page always passes the active project). Remove `test.fail`
-// once the backend is fixed.
 test("the notifications page lists the invitations sent for the project", async ({
   page,
   workspace,
 }) => {
-  test.fail();
   const invitee = `e2e-invitee-${uniqueId()}@example.com`;
   await apiPost(page, "/api/v1/invitations", {
     email: invitee,

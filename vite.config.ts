@@ -30,7 +30,8 @@ export default defineConfig(({ mode }) => {
         },
       },
     },
-    build: { sourcemap: true },
+    // Hidden source maps: not referenced by the bundles; the Docker image deletes them.
+    build: { sourcemap: "hidden" },
     // Unit tests for pure modules; browser journeys in e2e/ run under Playwright.
     test: { include: ["src/**/*.test.ts"], environment: "node" },
   };

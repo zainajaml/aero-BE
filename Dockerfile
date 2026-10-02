@@ -11,7 +11,7 @@ COPY . .
 # Browser-visible API origin, fixed at build time. Empty = same origin (nginx proxies /api below).
 ARG VITE_API_URL=""
 ENV VITE_API_URL=${VITE_API_URL}
-RUN npm run build
+RUN npm run build && find dist -name "*.map" -delete
 
 # --- Runtime: nginx serving dist with SPA fallback ----------------------------------------------
 FROM nginx:alpine

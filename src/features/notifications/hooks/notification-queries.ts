@@ -15,9 +15,10 @@ export const notificationKeys = {
   unsubscribe: (token: string) => [...notificationKeys.all, "unsubscribe", token] as const,
 };
 
-export function useNotificationLog(query: ListNotificationsQuery) {
+export function useNotificationLog(query: ListNotificationsQuery, enabled = true) {
   return useQuery({
     queryKey: notificationKeys.list(query),
+    enabled,
     queryFn: () => listNotifications(query),
     // Keep polling slow and foreground-only so an idle open tab doesn't hammer the server.
     refetchInterval: 120_000,

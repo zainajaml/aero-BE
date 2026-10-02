@@ -35,7 +35,7 @@ async function json<T>(response: Awaited<ReturnType<APIRequestContext["get"]>>):
  * Signs a new user up through the API and verifies the email through the Mailpit link. The request
  * context keeps the session cookie, so with `page.request` the page is signed in afterwards.
  */
-export async function signUpVerified(
+async function signUpVerified(
   request: APIRequestContext,
   baseURL: string,
   opts: { email?: string; firstName?: string; lastName?: string } = {},
@@ -64,7 +64,7 @@ export async function signUpVerified(
 }
 
 /** Runs the onboarding API steps: workspace, then the first project (sprint board by default). */
-export async function onboard(
+async function onboard(
   request: APIRequestContext,
   baseURL: string,
   user: User,
