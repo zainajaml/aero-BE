@@ -64,7 +64,10 @@ export function BulkActionBar({
 
         {!isKanban && (
           <Select value="" onValueChange={(v) => onMove(v === "backlog" ? null : v)}>
-            <SelectTrigger className="h-8 w-[180px] rounded-full text-xs">
+            <SelectTrigger
+              aria-label="Move selected tickets to"
+              className="h-8 w-[180px] rounded-full text-xs"
+            >
               <SelectValue placeholder="Move to…" />
             </SelectTrigger>
             <SelectContent>

@@ -32,6 +32,7 @@ export function DescriptionTab({
           key={ticket.id}
           compact
           editable={!sprintLocked}
+          ariaLabel="Description"
           projectId={ticket.projectId}
           members={members}
           content={descriptionToEditorContent(ticket.descriptionJson)}

@@ -70,12 +70,13 @@ export function WorkDetailsCard({
             onChange={(e) => setEmployeeNumber(e.target.value)}
             maxLength={40}
             placeholder="EMP-001"
+            aria-label="Employee #"
             disabled={!editing}
           />
         </StackField>
         <StackField label="Employment">
           <Select value={employmentStatus} onValueChange={setEmploymentStatus} disabled={!editing}>
-            <SelectTrigger className="h-8 w-full text-sm">
+            <SelectTrigger aria-label="Employment" className="h-8 w-full text-sm">
               <SelectValue placeholder="Select status" />
             </SelectTrigger>
             <SelectContent>
@@ -90,7 +91,7 @@ export function WorkDetailsCard({
       </div>
       <StackField label="Timezone">
         <Select value={tz} onValueChange={(v) => setTz(v as TzCode)} disabled={!editing}>
-          <SelectTrigger className="h-8 max-w-[200px] text-sm">
+          <SelectTrigger aria-label="Timezone" className="h-8 max-w-[200px] text-sm">
             <SelectValue />
           </SelectTrigger>
           <SelectContent>

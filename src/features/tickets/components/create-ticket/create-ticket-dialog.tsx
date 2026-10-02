@@ -81,8 +81,14 @@ function CreateTicketDialogInner({ projectId, projectKey, sprintId = null, trigg
 
           {/* Floating-label title */}
           <div className="relative mt-4 shrink-0 rounded-xl border border-[var(--tk-border)] bg-[var(--tk-surface)] px-3 pb-2 pt-5">
-            <label className="field-label pointer-events-none absolute left-3 top-1.5">Title</label>
+            <label
+              htmlFor="new-ticket-title"
+              className="field-label pointer-events-none absolute left-3 top-1.5"
+            >
+              Title
+            </label>
             <input
+              id="new-ticket-title"
               value={form.title}
               onChange={(e) => form.setTitle(e.target.value)}
               placeholder="Brief, action-oriented"
@@ -126,6 +132,7 @@ function CreateTicketDialogInner({ projectId, projectKey, sprintId = null, trigg
                 <div className="tk-editor tk-scroll flex min-h-0 flex-1 flex-col overflow-y-auto rounded-xl border border-[var(--tk-border)] bg-[var(--tk-surface)] p-[15px]">
                   <RichTextEditor
                     compact
+                    ariaLabel="Description"
                     projectId={projectId}
                     members={form.mentionMembers}
                     content={form.description}

@@ -57,6 +57,7 @@ export function SupportComposer({ issueId }: { issueId: string }) {
           key={composerKey}
           members={[]}
           placeholder="Type a message…"
+          ariaLabel="Message"
           onChange={setDraftDoc}
           onAttach={() => attachRef.current?.click()}
           className="h-[170px] rounded-2xl border-border/70 bg-background/40 pb-12"

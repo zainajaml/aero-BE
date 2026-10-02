@@ -14,11 +14,14 @@ export function TimeSelect({
   onChange,
   placeholder,
   after,
+  ariaLabel,
 }: {
   value: string;
   onChange: (v: string) => void;
   placeholder: string;
   after?: string;
+  /** Accessible name of the typed-time input. */
+  ariaLabel?: string;
 }) {
   const afterMins = after ? parseClockToMinutes(after) : null;
   const slots =
@@ -75,6 +78,7 @@ export function TimeSelect({
           type="text"
           value={draft ?? value}
           placeholder={placeholder}
+          aria-label={ariaLabel}
           onChange={(e) => {
             const next = e.target.value;
             // Hard cap: never accept more than 4 numeric digits (hhmm)

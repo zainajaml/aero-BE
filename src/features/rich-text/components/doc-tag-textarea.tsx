@@ -15,6 +15,8 @@ interface Props {
   textareaRef?: React.RefObject<HTMLTextAreaElement | null>;
   onInput?: (el: HTMLTextAreaElement) => void;
   onKeyDown?: (e: KeyboardEvent<HTMLTextAreaElement>) => void;
+  /** Accessible name when the visible label is not a <label> for this textarea. */
+  ariaLabel?: string;
 }
 
 /**
@@ -32,6 +34,7 @@ export function DocTagTextarea({
   textareaRef,
   onInput,
   onKeyDown,
+  ariaLabel,
 }: Props) {
   const innerRef = useRef<HTMLTextAreaElement>(null);
   const ref = textareaRef ?? innerRef;
@@ -110,6 +113,7 @@ export function DocTagTextarea({
         value={value}
         rows={rows}
         placeholder={placeholder}
+        aria-label={ariaLabel}
         disabled={disabled}
         className={className}
         onChange={(e) => {

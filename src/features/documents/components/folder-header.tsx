@@ -58,6 +58,7 @@ export function FolderHeader({
       {isEditing ? (
         <Input
           autoFocus
+          aria-label="Folder name"
           value={nameDraft}
           onChange={(ev) => onNameDraftChange(ev.target.value)}
           onBlur={onCommitRename}

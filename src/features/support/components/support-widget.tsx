@@ -125,7 +125,12 @@ export function SupportWidget({
       {open && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
           <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" />
-          <GlassPanel className="relative flex h-[80vh] max-h-[960px] w-[70vw] max-w-[1400px] overflow-hidden border-glass-border p-0">
+          <GlassPanel
+            role="dialog"
+            aria-modal="true"
+            aria-label="Support"
+            className="relative flex h-[80vh] max-h-[960px] w-[70vw] max-w-[1400px] overflow-hidden border-glass-border p-0"
+          >
             <SupportIssueList
               issues={issues}
               activeId={activeId}

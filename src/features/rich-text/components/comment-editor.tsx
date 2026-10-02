@@ -131,6 +131,8 @@ interface CommentEditorProps {
   attaching?: boolean;
   /** Hide the formatting toolbar for a plain, minimal input. */
   minimal?: boolean;
+  /** Accessible name of the editing area. */
+  ariaLabel?: string;
 }
 
 function Toolbar({
@@ -452,6 +454,7 @@ export function CommentEditor({
   attaching,
   projectId,
   minimal = false,
+  ariaLabel = "Comment",
 }: CommentEditorProps) {
   const membersRef = useRef(members);
   membersRef.current = members;
@@ -476,6 +479,8 @@ export function CommentEditor({
           "prose prose-sm dark:prose-invert max-w-none focus:outline-none px-3 py-2 text-sm text-foreground",
           editorClassName,
         ),
+        "aria-label": ariaLabel,
+        "aria-multiline": "true",
       },
       handleClick: editableLinkClickHandler,
       handlePaste: (_view, event) => {

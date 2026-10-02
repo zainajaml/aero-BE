@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useId, useState } from "react";
 import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
 import { Button } from "@/shared/ui/button";
@@ -11,10 +11,12 @@ import { DATE_RANGE_ERROR } from "@/shared/lib/date-validation";
 import { cn } from "@/shared/lib/utils";
 
 function SprintDatePicker({
+  id,
   value,
   onChange,
   placeholder = "Pick a date",
 }: {
+  id?: string;
   value: string;
   onChange: (v: string) => void;
   placeholder?: string;
@@ -25,6 +27,7 @@ function SprintDatePicker({
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
         <Button
+          id={id}
           type="button"
           variant="outline"
           className={cn(
@@ -69,11 +72,15 @@ export function SprintFormFields({
   onChange: (patch: Partial<SprintFormValues>) => void;
   datesInvalid: boolean;
 }) {
+  const id = useId();
   return (
     <div className="space-y-3">
       <div>
-        <Label className="text-xs">Name</Label>
+        <Label htmlFor={`${id}-name`} className="text-xs">
+          Name
+        </Label>
         <Input
+          id={`${id}-name`}
           value={values.name}
           onChange={(e) => onChange({ name: e.target.value.slice(0, 50) })}
           maxLength={50}
@@ -83,8 +90,11 @@ export function SprintFormFields({
       </div>
 
       <div>
-        <Label className="text-xs">Goal</Label>
+        <Label htmlFor={`${id}-goal`} className="text-xs">
+          Goal
+        </Label>
         <Textarea
+          id={`${id}-goal`}
           value={values.goal}
           onChange={(e) => onChange({ goal: e.target.value.slice(0, 250) })}
           maxLength={250}
@@ -97,12 +107,24 @@ export function SprintFormFields({
       </div>
       <div className="grid grid-cols-2 gap-3">
         <div>
-          <Label className="text-xs">Start</Label>
-          <SprintDatePicker value={values.startsAt} onChange={(v) => onChange({ startsAt: v })} />
+          <Label htmlFor={`${id}-start`} className="text-xs">
+            Start
+          </Label>
+          <SprintDatePicker
+            id={`${id}-start`}
+            value={values.startsAt}
+            onChange={(v) => onChange({ startsAt: v })}
+          />
         </div>
         <div>
-          <Label className="text-xs">End</Label>
-          <SprintDatePicker value={values.endsAt} onChange={(v) => onChange({ endsAt: v })} />
+          <Label htmlFor={`${id}-end`} className="text-xs">
+            End
+          </Label>
+          <SprintDatePicker
+            id={`${id}-end`}
+            value={values.endsAt}
+            onChange={(v) => onChange({ endsAt: v })}
+          />
         </div>
       </div>
       {datesInvalid && <p className="text-xs font-medium text-destructive">{DATE_RANGE_ERROR}</p>}

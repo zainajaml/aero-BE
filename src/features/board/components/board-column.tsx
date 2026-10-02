@@ -74,7 +74,7 @@ export function BoardColumn({
 }) {
   const { setNodeRef } = useDroppable({ id: col.id, data: { type: "column" } });
   return (
-    <GlassPanel className="flex h-full min-h-0 flex-col p-3">
+    <GlassPanel role="region" aria-label={col.name} className="flex h-full min-h-0 flex-col p-3">
       <div className="mb-3 flex items-center justify-between px-1">
         <div className="flex items-center gap-2">
           <h3 className="text-sm font-semibold tracking-tight">{col.name}</h3>

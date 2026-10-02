@@ -217,9 +217,9 @@ export function InviteDialog({
             )}
           </div>
           <div className="space-y-2">
-            <Label>Role</Label>
+            <Label htmlFor="invite-role">Role</Label>
             <Select value={role || undefined} onValueChange={(v) => setRole(v as RoleValue)}>
-              <SelectTrigger>
+              <SelectTrigger id="invite-role">
                 <SelectValue placeholder="Select a role..." />
               </SelectTrigger>
               <SelectContent>
@@ -233,9 +233,9 @@ export function InviteDialog({
           </div>
 
           <div className="space-y-2">
-            <Label>Job title</Label>
+            <Label htmlFor="invite-job-title">Job title</Label>
             <Select value={jobTitle} onValueChange={setJobTitle}>
-              <SelectTrigger>
+              <SelectTrigger id="invite-job-title">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>

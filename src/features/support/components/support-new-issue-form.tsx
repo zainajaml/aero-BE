@@ -72,6 +72,7 @@ export function SupportNewIssueForm({
           <CommentEditor
             members={[]}
             placeholder="Describe the issue in as much detail as possible…"
+            ariaLabel="Description"
             onChange={setNewDescDoc}
             className="min-h-[180px] rounded-xl border-border/70 bg-background/40"
           />

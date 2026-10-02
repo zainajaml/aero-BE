@@ -74,6 +74,7 @@ export function WorkLogForm({
           onChange={f.setNote}
           onInput={(el) => resizeTextareaToMaxLines(el)}
           placeholder="Type # to tag a document"
+          ariaLabel="What did you work on?"
           className="w-full resize-none bg-transparent py-0 text-sm leading-snug text-[var(--tk-body)] outline-none placeholder:text-[13px] placeholder:font-normal placeholder:text-[var(--tk-muted)]"
         />
       </div>
@@ -134,11 +135,18 @@ export function WorkLogForm({
               if (!isEndAfterStart(v, f.stop)) f.setStop("");
             }}
             placeholder="hh:mm"
+            ariaLabel="Time start"
           />
         </FloatField>
         <FloatField label="Time stop" className="w-[152px]">
           <Clock className="h-4 w-4 shrink-0 text-[var(--tk-muted)]" />
-          <TimeSelect value={f.stop} onChange={f.setStop} placeholder="hh:mm" after={f.start} />
+          <TimeSelect
+            value={f.stop}
+            onChange={f.setStop}
+            placeholder="hh:mm"
+            after={f.start}
+            ariaLabel="Time stop"
+          />
         </FloatField>
 
         {actions}

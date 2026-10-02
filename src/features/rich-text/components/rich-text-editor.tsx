@@ -93,6 +93,8 @@ interface RichTextEditorProps {
   projectId?: string | null;
   /** People who can be tagged with "@" — pass the current project's members only. */
   members?: MentionMember[];
+  /** Accessible name of the editing area (it has a visible label nearby, not a <label>). */
+  ariaLabel?: string;
 }
 
 function ToolbarButton({
@@ -574,6 +576,7 @@ export function RichTextEditor({
   onImageClick,
   projectId,
   members = [],
+  ariaLabel,
 }: RichTextEditorProps) {
   // Tracks the last content we emitted (in stored/sentinel form) so the sync
   // effect can ignore echoes of our own edits and avoid cursor jumps.
@@ -644,6 +647,7 @@ export function RichTextEditor({
           "prose dark:prose-invert max-w-none leading-[1.3] focus:outline-none py-4 text-foreground",
           compact ? "min-h-[160px]" : "min-h-[300px]",
         ),
+        ...(ariaLabel ? { "aria-label": ariaLabel, "aria-multiline": "true" } : {}),
       },
       handleClick: editableLinkClickHandler,
       handlePaste: (_view, event) => {

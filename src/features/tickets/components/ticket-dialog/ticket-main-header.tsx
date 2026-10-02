@@ -68,8 +68,14 @@ export function TicketMainHeader({
 
       {/* Floating-label title */}
       <div className="relative mt-4 shrink-0 rounded-xl border border-[var(--tk-border)] bg-[var(--tk-surface)] px-3 pb-2 pt-5">
-        <label className="field-label pointer-events-none absolute left-3 top-1.5">Title</label>
+        <label
+          htmlFor={`ticket-title-${ticket.id}`}
+          className="field-label pointer-events-none absolute left-3 top-1.5"
+        >
+          Title
+        </label>
         <input
+          id={`ticket-title-${ticket.id}`}
           value={title}
           onChange={(e) => onTitleChange(e.target.value)}
           readOnly={sprintLocked}

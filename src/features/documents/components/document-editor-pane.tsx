@@ -87,6 +87,7 @@ export function DocumentEditorPane({
             disabled={!canEdit}
             onChange={(e) => draft.updateTitleDraft(e.target.value)}
             placeholder="Page title"
+            aria-label="Page title"
             className="h-auto border-0 bg-transparent px-0 font-bold shadow-none focus-visible:ring-0 !text-[22pt]"
           />
           {allProjects ? (
@@ -129,6 +130,7 @@ export function DocumentEditorPane({
               key={selected.id}
               content={current.content}
               editable={canEdit}
+              ariaLabel="Page content"
               onChange={draft.updateContentDraft}
               onContentReady={draft.initializeContentDraft}
             />
