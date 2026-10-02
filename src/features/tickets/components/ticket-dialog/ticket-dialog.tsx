@@ -109,6 +109,7 @@ function LoadedTicket({
           title={form.title}
           onTitleChange={form.setTitle}
           sprintLocked={sprintLocked}
+          viewOnlyMessage={data.viewOnly ? data.viewMsg : undefined}
           activeTab={activeTab}
           onTabChange={setActiveTab}
           commentCount={comments.comments.length}

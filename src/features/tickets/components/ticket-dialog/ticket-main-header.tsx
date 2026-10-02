@@ -11,6 +11,7 @@ export function TicketMainHeader({
   title,
   onTitleChange,
   sprintLocked,
+  viewOnlyMessage,
   activeTab,
   onTabChange,
   commentCount,
@@ -20,6 +21,8 @@ export function TicketMainHeader({
   title: string;
   onTitleChange: (title: string) => void;
   sprintLocked: boolean;
+  /** Set when the ticket is read-only because of the user's access, not a closed sprint. */
+  viewOnlyMessage?: string;
   activeTab: TicketTab;
   onTabChange: (tab: TicketTab) => void;
   commentCount: number;
@@ -58,8 +61,8 @@ export function TicketMainHeader({
 
       {sprintLocked && (
         <div className="mt-4 shrink-0 rounded-xl border border-[var(--tk-border)] bg-[var(--tk-surface)] px-4 py-3 text-sm text-[var(--tk-body)]">
-          This ticket is part of a completed sprint and is read-only. Re-open the sprint to make
-          changes.
+          {viewOnlyMessage ??
+            "This ticket is part of a completed sprint and is read-only. Re-open the sprint to make changes."}
         </div>
       )}
 
